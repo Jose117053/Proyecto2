@@ -1,0 +1,20 @@
+msg.bienvenida=Bienvenido a nuestro servicio de reservación de hotel.
+msg.menuReservas=Seleccione una opción: \n1. Verificar disponibilidad de habitaciones\n2. Realizar una reserva\n3. Consultar ofertas especiales \n4. Finalizar su reserva\n0. Salir del sistema de reservas
+msg.seleccionHabitacion=Por favor, seleccione la habitación de su preferencia.
+msg.errorHabitacion=Disculpe, la habitación seleccionada no está disponible. Intente seleccionar una diferente.
+msg.costoReserva=El costo total de su reserva es:
+msg.exitoReserva=Su habitación ha sido reservada con éxito. A continuación, los detalles de su reserva:
+msg.finalizarReserva=Su reserva ha sido confirmada con éxito. ¡Esperamos disfrute su estancia!
+msg.errorFondos=El monto proporcionado no es suficiente para completar esta reserva. Considere ajustar su selección o añadir fondos a su cuenta.
+msg.ingresarDatos=Ingrese sus datos para procesar la reserva.
+msg.errorDatos=Los datos ingresados son incorrectos o incompletos. Por favor, revise la información y vuelva a intentarlo.
+msg.alertaSeguridad=Por motivos de seguridad y tras varios intentos fallidos, procederemos a cerrar la sesión.
+msg.opcionInvalida=Ha seleccionado una opción inválida. Por favor, intente de nuevo.
+msg.sinOfertas=Actualmente no hay ofertas disponibles. Le invitamos a consultar regularmente para futuras promociones.
+msg.menuReservas=Menú de Reservas
+msg.despedida=Gracias por utilizar nuestro sistema de reservas. ¡Esperamos verlo pronto!
+msg.reservaVacia=Su carrito de reservas está vacío. Por favor, añada una habitación para continuar con el proceso.
+msg.fechaLlegada=Su fecha de check-in es:
+msg.ofertas=Consulte nuestras ofertas especiales disponibles.
+msg.reservar=Reservar habitación
+

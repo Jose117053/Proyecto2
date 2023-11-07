@@ -15,8 +15,8 @@ public class Correo {
         properties.put("mail.smtp.port", "587");
 
         // Tu dirección de correo y contraseña
-        final String myAccountEmail = "rayaperezjoseluis@gmail.com";
-        final String password = "snpixqmguqqvuznr";
+        final String myAccountEmail = "hotelreservaciones24@gmail.com";
+        final String password = "hgeuqjrorinzyycx";
 
         // Crear una sesión con autenticación
         Session session = Session.getInstance(properties, new Authenticator() {
