@@ -53,6 +53,7 @@ public class Usuario implements Serializable, Observador {
     public void actualizar(Object oferta) {
         if (oferta instanceof Oferta) {
             this.ofertasDisponibles.add((Oferta) oferta);
+            System.out.println(nombre + "Recibió una oferta");
         }
     }
 

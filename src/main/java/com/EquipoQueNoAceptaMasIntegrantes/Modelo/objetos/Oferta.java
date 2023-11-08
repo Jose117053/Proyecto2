@@ -21,10 +21,10 @@ import lombok.AllArgsConstructor;
 public class Oferta {
 
     private Long id;
-    private Habitacion habitacion;
-    private BigDecimal porcentajeDescuento;
+    private String nombreHabitacion;
+    private String detalle;
+    private double porcentajeDescuento;
     private String codigoPaisOferta;
-    private Date validaHasta;
 
     /**
      * Constructor por defecto que genera un ID para la oferta.
@@ -34,6 +34,12 @@ public class Oferta {
      */
     public Oferta() throws InterruptedException {
         this.id = generarID();
+    }
+
+    public Oferta(String nombreHabitacion, String detalle, double porcentaje) throws InterruptedException {
+        this.nombreHabitacion = nombreHabitacion;
+        this.detalle = detalle;
+        this.porcentajeDescuento = porcentaje;
     }
 
     /**
@@ -50,7 +56,7 @@ public class Oferta {
 
     @Override
     public String toString() {
-        return String.format("Oferta [habitación=%s, descuento=%s, validez=%s]",
-                habitacion.getNombre(), porcentajeDescuento, validaHasta);
+        return String.format("Oferta [habitación=%s, detalle=%s, descuento=%s]",
+                nombreHabitacion, detalle, porcentajeDescuento);
     }
 }

@@ -6,5 +6,6 @@ package com.EquipoQueNoAceptaMasIntegrantes.Modelo.interfaces;
  * @param evento El evento o cambio a notificar.
  */
 public interface Sujeto {
-    void notificar(Object evento);
+
+    void notificar();
 }

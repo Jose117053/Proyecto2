@@ -50,12 +50,12 @@ public class RepositorioHabitacion implements Repositorio<Habitacion> {
 
         // Crear 2 Suites
         for (int i = 201; i <= 202; i++) {
-            habitaciones.add(generador.getHabitacionHotel(bdHabitacion, 2, i)); // 1 representa el tipo 'Normal'
+            habitaciones.add(generador.getHabitacionHotel(bdHabitacion, 2, i)); // 2 representa el tipo 'Suite'
         }
 
         // Crear 2 Suites
         for (int i = 302; i <= 303; i++) {
-            habitaciones.add(generador.getHabitacionHotel(bdHabitacion, 2, i)); // 1 representa el tipo 'Normal'
+            habitaciones.add(generador.getHabitacionHotel(bdHabitacion, 2, i)); // 3 representa el tipo 'GrandSuite'
         }
     }
 

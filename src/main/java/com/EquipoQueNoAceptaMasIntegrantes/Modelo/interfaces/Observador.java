@@ -6,5 +6,5 @@ package com.EquipoQueNoAceptaMasIntegrantes.Modelo.interfaces;
  * @param evento El evento notificado por el Sujeto.
  */
 public interface Observador {
-    void actualizar(Object evento);
+    void actualizar(Object oferta);
 }
