@@ -12,8 +12,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- Definir la versión de Lombok aquí -->
+        <lombok-version>1.18.24</lombok-version> <!-- Asegúrate de usar la versión más reciente -->
     </properties>
-
 
 <build>
     <plugins>
@@ -45,7 +46,6 @@
                                 <mainClass>com.EquipoQueNoAceptaMasIntegrantes.RecepcionHotel</mainClass>
                             </transformer>
                         </transformers>
-                      
                     </configuration>
                 </execution>
             </executions>
@@ -53,7 +53,14 @@
         <!-- Other plugins if necessary -->
     </plugins>
 </build>
+
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok-version}</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- JUnit 5 dependency -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -62,23 +69,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- JavaMail API
+        <!-- Dependencies for JavaMail API -->
         <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>javax.mail-api</artifactId>
-            <version>1.6.2</version> 
-        </dependency> -->
-        <!-- Java Activation Framework 
-        <dependency>
-            <groupId>com.sun.activation</groupId>
-            <artifactId>javax.activation</artifactId>
-            <version>1.2.0</version>
-        </dependency> -->
-    <dependency>
-        <groupId>com.sun.mail</groupId>
-        <artifactId>javax.mail</artifactId>
-        <version>1.6.2</version>
-    </dependency>
-        <!-- Otras dependencias si son necesarias -->
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
     </dependencies>
 </project>

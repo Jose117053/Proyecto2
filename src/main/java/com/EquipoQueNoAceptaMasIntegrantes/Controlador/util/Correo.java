@@ -1,4 +1,4 @@
-package com.EquipoQueNoAceptaMasIntegrantes.util;
+package com.EquipoQueNoAceptaMasIntegrantes.Controlador.util;
 
 import javax.mail.*;
 import javax.mail.internet.*;
