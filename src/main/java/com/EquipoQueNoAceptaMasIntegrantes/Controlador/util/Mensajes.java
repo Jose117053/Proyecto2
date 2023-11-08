@@ -1,4 +1,4 @@
-package com.EquipoQueNoAceptaMasIntegrantes.util;
+package com.EquipoQueNoAceptaMasIntegrantes.Controlador.util;
 
 import java.io.IOException;
 import java.io.InputStream;

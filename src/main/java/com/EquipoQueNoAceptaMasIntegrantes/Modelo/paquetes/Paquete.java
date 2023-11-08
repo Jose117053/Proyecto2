@@ -1,4 +1,4 @@
-package com.EquipoQueNoAceptaMasIntegrantes.Modelo;
+package com.EquipoQueNoAceptaMasIntegrantes.Modelo.paquetes;
 import java.io.IOException;
 public abstract class  Paquete {
 

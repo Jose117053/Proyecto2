@@ -1,6 +1,6 @@
-package com.EquipoQueNoAceptaMasIntegrantes.Modelo;
+package com.EquipoQueNoAceptaMasIntegrantes.Modelo.paquetes;
 
-import com.EquipoQueNoAceptaMasIntegrantes.util.Mensajes;
+import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
 import java.io.IOException;
 
 /**

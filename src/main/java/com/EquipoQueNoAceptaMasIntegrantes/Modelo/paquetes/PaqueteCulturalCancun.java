@@ -1,12 +1,12 @@
-package com.EquipoQueNoAceptaMasIntegrantes.Modelo;
+package com.EquipoQueNoAceptaMasIntegrantes.Modelo.paquetes;
+import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
 
-import com.EquipoQueNoAceptaMasIntegrantes.util.Mensajes;
 import java.io.IOException;
 
 /**
  * Clase que modela el paquete Cultural Cancun
  */
-public class PaqueteCulturalCancun extends Paquete{
+public class PaqueteCulturalCancun extends Paquete {
 
     /**
      * Constructor del paquete Cultural Cancun

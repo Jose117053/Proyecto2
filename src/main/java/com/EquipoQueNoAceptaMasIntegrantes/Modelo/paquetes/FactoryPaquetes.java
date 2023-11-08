@@ -1,4 +1,4 @@
-package com.EquipoQueNoAceptaMasIntegrantes.Modelo;
+package com.EquipoQueNoAceptaMasIntegrantes.Modelo.paquetes;
 
 /**
  * Clase que simula la fabrica de paquetes
