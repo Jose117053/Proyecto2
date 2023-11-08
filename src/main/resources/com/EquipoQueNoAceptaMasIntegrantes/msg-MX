@@ -17,4 +17,7 @@ msg.reservaVacia=Su carrito de reservas está vacío. Por favor, añada una habi
 msg.fechaLlegada=Su fecha de check-in es:
 msg.ofertas=Consulte nuestras ofertas especiales disponibles.
 msg.reservar=Reservar habitación
+msg.descripcionAventura=Tirolesa y circuito de cuerdas en Parque Xplor, Snorkel y Tour de ATV's en la selva\nCosto por persona: $5000
+msg.descripcionCultural=Visita a las Ruinas de Tulum, Cenote Sagrado Ik Kil, Show de danzas prehispanicas\nCosto por persona:  $4000
+msg.descripcionRelax=Spa maya, Crucero al atardecer por la Laguna Nichipte, Visita a Isla Mujeres\nCosto por persona: $ 6000
 

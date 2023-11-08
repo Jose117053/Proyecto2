@@ -3,9 +3,7 @@ package com.EquipoQueNoAceptaMasIntegrantes;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.BDHabitacion;
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.GeneradorDeHabitaciones;
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.Habitacion;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.*;
 import com.EquipoQueNoAceptaMasIntegrantes.util.Mensajes;
 
 public class RecepcionHotel {
@@ -23,10 +21,12 @@ public class RecepcionHotel {
         BDHabitacion habitaciones= new BDHabitacion();
         System.out.print(habitaciones.habitacionesDisponibles());
         int tipoHabitacion=3;//suponiendo que eligen habitacion suite vista al mar
-        Habitacion habitacion= generador.getHabitacionHotel(habitaciones, tipoHabitacion);
-        habitacion.setNumero(22);
+        Habitacion habitacion= generador.getHabitacionHotel(habitaciones, tipoHabitacion, 22);
         System.out.println("Habitacion " + tipoHabitacion + "\n"+habitacion.descripcion());
         /////////////////////////////
+        Paquete paquete= FactoryPaquetes.creaPaquete(2);
+        System.out.println(paquete.descripcion("US"));
+        ////////////////////////////
 
     }
 }
