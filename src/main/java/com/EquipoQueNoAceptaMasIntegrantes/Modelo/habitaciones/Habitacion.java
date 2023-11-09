@@ -2,10 +2,11 @@ package com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitaciones;
 
 import lombok.Getter;
 import lombok.Setter;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores.ExtraHabitacion;
 
 @Getter
 @Setter
-public class Habitacion implements Cloneable {
+public class Habitacion implements Cloneable, ExtraHabitacion {
     private String nombre;
     private int numero;
     private double costo;
@@ -43,6 +44,10 @@ public class Habitacion implements Cloneable {
                 "Cama: " + getCama() + "\n " +
                 "Suite: " + auxSuite() + "\n " +
                 "Vista Al mar: " + auxVistaAlmar() + "\n ";
+    }
+
+    public double costo() {
+        return costo;
     }
 
     /**
