@@ -1,12 +1,14 @@
 package com.EquipoQueNoAceptaMasIntegrantes;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.*;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.Usuario;
 import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.GeneradorOfertas;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.Oferta;
 
 public class RecepcionHotel {
     public static void main(String[] args) throws InterruptedException, IOException {
@@ -14,13 +16,13 @@ public class RecepcionHotel {
         RepositorioUsuario repositorioUsuario = RepositorioUsuario.getInstance();
         RepositorioOferta repositorioOferta = RepositorioOferta.getInstance();
         RepositorioHabitacion repositorioHabitacion = RepositorioHabitacion.getInstance();
-
         GeneradorOfertas generadorOfertas = new GeneradorOfertas(repositorioOferta, repositorioHabitacion);
-
+        String codigoPais = null;
         Properties msg = null;
+
         while (msg == null) {
             System.out.println("Elige tu país / Choose your country (MX/US):");
-            String codigoPais = scanner.nextLine().trim().toUpperCase();
+            codigoPais = scanner.nextLine().trim().toUpperCase();
 
             // Solo permitir MX o US como entrada válida
             if (!codigoPais.equals("MX") && !codigoPais.equals("US")) {
@@ -38,7 +40,7 @@ public class RecepcionHotel {
         }
 
         System.out.println(msg.getProperty("msg.bienvenida"));
-        RepositorioPaquete repositorioPaquete = RepositorioPaquete.getInstance();
+        RepositorioPaquete repositorioPaquete = RepositorioPaquete.getInstance(codigoPais);
 
         boolean acceso = false;
         Usuario usuario = null;
@@ -59,7 +61,7 @@ public class RecepcionHotel {
                 System.out.println(msg.getProperty("msg.errorLogin"));
             }
         }
-        generadorOfertas.simularCreadorOferta();
+        generadorOfertas.simularCreadorOferta(codigoPais);
 
         boolean sesionActiva = true;
         while (sesionActiva) {
@@ -72,7 +74,12 @@ public class RecepcionHotel {
                     break;
                 case 2:
                     // Lógica para ver ofertas y promociones especiales
-                    repositorioOferta.findAll().forEach(System.out::println);
+                    List<Oferta> ofertas = (List<Oferta>) repositorioOferta.findAll();
+                    if (ofertas.isEmpty()) {
+                        System.out.println(msg.getProperty("msg.sinOfertas"));
+                    } else {
+                        ofertas.forEach(System.out::println);
+                    }
                     break;
                 case 3:
                     repositorioPaquete.findAll().forEach(System.out::println);

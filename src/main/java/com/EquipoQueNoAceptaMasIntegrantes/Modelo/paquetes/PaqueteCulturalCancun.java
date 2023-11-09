@@ -8,14 +8,16 @@ import java.io.IOException;
  * Clase que modela el paquete Cultural Cancun
  */
 public class PaqueteCulturalCancun extends Paquete {
-    private String codigoPais; // Suponiendo que tienes esto definido en tu clase
+    // private String codigoPais; // Suponiendo que tienes esto definido en tu clase
 
     /**
      * Constructor del paquete Cultural Cancun
      */
-    public PaqueteCulturalCancun() {
-        precio = 250;
-        id = 2;
+    public PaqueteCulturalCancun(String codigoPais) {
+        super(codigoPais); // Llama al constructor de la superclase con codigoPais
+        this.precio = 250;
+        this.id = 2;
+        // No es necesario asignar this.codigoPais porque ya se asignó en la superclase
     }
 
     /**

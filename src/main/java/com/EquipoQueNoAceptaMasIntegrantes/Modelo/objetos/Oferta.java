@@ -19,6 +19,7 @@ public class Oferta {
     private String nombreHabitacion;
     private String detalle;
     private double porcentajeDescuento;
+    private String codigoPais;
 
     /**
      * Constructor por defecto que genera un ID para la oferta.
@@ -30,10 +31,11 @@ public class Oferta {
         this.id = generarID();
     }
 
-    public Oferta(String nombreHabitacion, String detalle, double porcentaje) throws InterruptedException {
+    public Oferta(String nombreHabitacion, String detalle, double porcentaje, String codigoPais) throws InterruptedException {
         this.nombreHabitacion = nombreHabitacion;
         this.detalle = detalle;
         this.porcentajeDescuento = porcentaje;
+        this.codigoPais=codigoPais;
     }
 
     /**

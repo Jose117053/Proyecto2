@@ -6,9 +6,14 @@ import lombok.Getter;
 @Getter
 public abstract class Paquete {
 
-    /* El precio del paquete */
     int precio;
     int id;
+    String codigoPais;
+
+    // Constructor que acepta codigoPais
+    public Paquete(String codigoPais) {
+        this.codigoPais = codigoPais;
+    }
 
     /**
      * Metodo abstracto que devuelve la descripcion del paquete

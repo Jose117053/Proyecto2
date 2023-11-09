@@ -7,14 +7,15 @@ import java.io.IOException;
  * Clase que modela el paquete Aventura Cancun
  */
 public class PaqueteAventuraCancun extends Paquete {
-    private String codigoPais; // Suponiendo que tienes esto definido en tu clase
+    // private String codigoPais; // Suponiendo que tienes esto definido en tu clase
 
     /**
      * Constructor del paquete Aventura Cancun
      */
-    public PaqueteAventuraCancun() {
-        precio = 200;
-        id = 1;
+    public PaqueteAventuraCancun(String codigoPais) {
+        super(codigoPais); // Llama al constructor de la superclase con codigoPais
+        this.precio = 200;
+        this.id = 1;
     }
 
     /**

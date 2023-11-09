@@ -4,11 +4,13 @@ import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
 import java.io.IOException;
 
 public class PaqueteRelaxCancun extends Paquete {
-    private String codigoPais; // Suponiendo que tienes esto definido en tu clase
+    // private String codigoPais; // Suponiendo que tienes esto definido en tu clase
 
-    public PaqueteRelaxCancun() {
-        precio = 300;
-        id = 3;
+    public PaqueteRelaxCancun(String codigoPais) {
+        super(codigoPais); // Llama al constructor de la superclase con codigoPais
+        this.precio = 300;
+        this.id = 3;
+        // No es necesario asignar this.codigoPais porque ya se asignó en la superclase
     }
 
     /**

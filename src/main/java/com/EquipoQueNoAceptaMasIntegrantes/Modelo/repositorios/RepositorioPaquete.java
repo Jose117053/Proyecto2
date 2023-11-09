@@ -12,27 +12,27 @@ public class RepositorioPaquete implements Repositorio<Paquete> {
     private static volatile RepositorioPaquete uniqueInstance;
     private List<Paquete> paquetes;
 
-    public static RepositorioPaquete getInstance() {
+    public static RepositorioPaquete getInstance(String codigoPais) {
         if (uniqueInstance == null) {
             synchronized (RepositorioPaquete.class) {
                 if (uniqueInstance == null) {
-                    uniqueInstance = new RepositorioPaquete();
+                    uniqueInstance = new RepositorioPaquete(codigoPais);
                 }
             }
         }
         return uniqueInstance;
     }
 
-    private RepositorioPaquete() {
-        inicializarPaquetes();
+    private RepositorioPaquete(String codigoPais) {
+        inicializarPaquetes(codigoPais);
     }
 
-    private void inicializarPaquetes() {
+    private void inicializarPaquetes(String codigoPais) {
         paquetes = new ArrayList<>();
 
-        paquetes.add(creaPaquete(1));
-        paquetes.add(creaPaquete(2));
-        paquetes.add(creaPaquete(3));
+        paquetes.add(creaPaquete(1, codigoPais));
+        paquetes.add(creaPaquete(2, codigoPais));
+        paquetes.add(creaPaquete(3, codigoPais));
 
     }
 
