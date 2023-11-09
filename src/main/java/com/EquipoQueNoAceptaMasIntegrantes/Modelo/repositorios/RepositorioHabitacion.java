@@ -53,9 +53,9 @@ public class RepositorioHabitacion implements Repositorio<Habitacion> {
             habitaciones.add(generador.getHabitacionHotel(bdHabitacion, 2, i)); // 2 representa el tipo 'Suite'
         }
 
-        // Crear 2 Suites
+        // Crear 2 GrandSuites
         for (int i = 302; i <= 303; i++) {
-            habitaciones.add(generador.getHabitacionHotel(bdHabitacion, 2, i)); // 3 representa el tipo 'GrandSuite'
+            habitaciones.add(generador.getHabitacionHotel(bdHabitacion, 3, i)); // 3 representa el tipo 'GrandSuite'
         }
     }
 
@@ -90,7 +90,7 @@ public class RepositorioHabitacion implements Repositorio<Habitacion> {
         String s = "";
 
         for (Habitacion habitacion : nombre) {
-            s += habitacion.toString();
+            s += habitacion.descripcion();
         }
 
         return s;

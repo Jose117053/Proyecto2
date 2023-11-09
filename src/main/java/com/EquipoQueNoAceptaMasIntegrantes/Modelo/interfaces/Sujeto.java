@@ -7,5 +7,5 @@ package com.EquipoQueNoAceptaMasIntegrantes.Modelo.interfaces;
  */
 public interface Sujeto {
 
-    void notificar();
+    void notificar(Object oferta);
 }
