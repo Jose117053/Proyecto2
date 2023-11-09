@@ -1,4 +1,7 @@
 msg.bienvenida=Welcome to our hotel reservation service.
+msg.loginUser=Please, enter your username:
+msg.loginPass=Please, enter your password:
+
 msg.menuReservas=Please select an option: \n1. Check room availability\n2. Make a reservation\n3. View special offers \n4. Complete your reservation\n0. Exit reservation system
 msg.seleccionHabitacion=Please select the room of your choice.
 msg.errorHabitacion=We apologize, the selected room is not available. Please choose a different room.

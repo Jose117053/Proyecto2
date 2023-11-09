@@ -1,9 +1,7 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos;
 
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitaciones.Habitacion;
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.*;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.*;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
@@ -12,13 +10,10 @@ import java.util.Random;
 public class GeneradorOfertas {
 
     public static final int SEPARACION_OFERTAS = 16000;
-    public static final String DESCUENTO = "0.15";
-    public static final long EXPIRACION_OFERTA = 30L;
     private RepositorioOferta repositorioOferta;
     private RepositorioHabitacion repositorioHabitacion;
 
     private List<String> departamentos = List.of("Normal", "Suite", "GrandSuite");
-    private List<String> codigosPaises = List.of("MX", "US");
     private Random random = new Random();
 
     public GeneradorOfertas(RepositorioOferta repositorioOferta, RepositorioHabitacion repositorioHabitacion) {
@@ -34,7 +29,7 @@ public class GeneradorOfertas {
                     Oferta oferta = crearOfertaRandom();
                     repositorioOferta.guardar(oferta);
                     System.out.println(
-                            "\nOferta generada para los usuarios con codigo de pais " + oferta.getCodigoPaisOferta());
+                            "\nOferta generada para todos los usuarios");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     System.out.println("Interrupted exception");
@@ -47,29 +42,36 @@ public class GeneradorOfertas {
     }
 
     public Oferta crearOfertaRandom() throws Exception {
-        // Seleccionar un departamento de manera aleatoria.
-        int indexDepartamento = random.nextInt(departamentos.size());
-        String departamentoSeleccionado = departamentos.get(indexDepartamento);
-        Collection<Habitacion> habitacionesCollection = repositorioHabitacion.buscarPorNombre(departamentoSeleccionado);
+        // Seleccionar un tipo de habitación de manera aleatoria.
+        int indexTipo = random.nextInt(departamentos.size());
+        String tipoHabitacionSeleccionado = departamentos.get(indexTipo);
 
-        if (habitacionesCollection.isEmpty()) {
-            throw new Exception("No hay habitaciones disponibles en el departamento: " + departamentoSeleccionado);
+        // Verificar si hay habitaciones disponibles del tipo seleccionado.
+        Collection<Habitacion> habitacionesDelTipo = repositorioHabitacion.buscarPorNombre(tipoHabitacionSeleccionado);
+        if (habitacionesDelTipo.isEmpty()) {
+            throw new Exception("No hay habitaciones disponibles para el tipo: " + tipoHabitacionSeleccionado);
         }
 
-        // Seleccionar una habitación aleatoria del departamento seleccionado.
-        List<Habitacion> habitacionesList = new ArrayList<>(habitacionesCollection);
-        int randomIndexHabitacion = random.nextInt(habitacionesList.size());
-        Habitacion habitacionSeleccionada = habitacionesList.get(randomIndexHabitacion);
+        // Generar un descuento aleatorio entre 0.1 y 0.3
+        double descuentoAleatorio = 0.1 + (0.2) * random.nextDouble();
+        descuentoAleatorio = Math.round(descuentoAleatorio * 100.0) / 100.0; // Redondear a dos decimales
 
-        // Crear la oferta con la habitación seleccionada.
+        // Lista de descripciones posibles
+        List<String> descripciones = List.of(
+                "Descuento especial de temporada",
+                "Promoción limitada",
+                "Oferta por tiempo limitado",
+                "Precio especial para reservaciones anticipadas",
+                "Última oportunidad de descuento");
+
+        // Seleccionar una descripción aleatoria de la lista
+        String descripcionAleatoria = descripciones.get(random.nextInt(descripciones.size()));
+
+        // Crear una oferta para ese tipo de habitación.
         Oferta oferta = new Oferta(
-                habitacionSeleccionada.getNombre(), // Suponiendo que Habitación tiene un getter para nombre
-                "Detalle generico o algo específico de la habitación", // Deberás definir el detalle aquí
-                Double.parseDouble(DESCUENTO));
-
-        // Seleccionar un código de país de manera aleatoria.
-        int indexCodigoPais = random.nextInt(codigosPaises.size());
-        oferta.setCodigoPaisOferta(codigosPaises.get(indexCodigoPais));
+                tipoHabitacionSeleccionado, // Este es el nombre del tipo de habitación al que se aplica la oferta
+                descripcionAleatoria, // Descripción aleatoria seleccionada de la lista
+                descuentoAleatorio); // Descuento aleatorio generado
 
         return oferta;
     }

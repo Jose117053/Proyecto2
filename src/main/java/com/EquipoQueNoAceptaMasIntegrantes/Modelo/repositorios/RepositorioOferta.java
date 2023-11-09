@@ -48,22 +48,10 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
         return ofertas;
     }
 
-    // Método que retorna una oferta aleatoria del repositorio
-    public Oferta getRandomOferta() {
-        if (this.ofertas.isEmpty()) {
-            return null; // o manejar de otra forma si no hay ofertas
-        }
-        int index = (int) (Math.random() * this.ofertas.size());
-        return this.ofertas.get(index);
-    }
-
     @Override
     public void notificar(Object oferta) {
         if (oferta instanceof Oferta) {
-            Oferta res = (Oferta) oferta;
             repositorioUsuario.findAll()
-                    .stream()
-                    .filter(u -> u.getCodigoPais().equals(res.getCodigoPaisOferta()))
                     .forEach(u -> u.actualizar(oferta));
         }
     }

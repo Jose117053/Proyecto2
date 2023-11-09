@@ -1,4 +1,6 @@
-msg.bienvenida=Bienvenido a nuestro servicio de reservación de hotel.
+msg.bienvenida=Bienvenido a nuestro servicio de reservación de hotel
+msg.loginUser=Por favor, ingrese su nombre de usuario:
+msg.loginPass=Por favor, ingrese su contraseña:
 msg.menuReservas=Seleccione una opción: \n1. Verificar disponibilidad de habitaciones\n2. Realizar una reserva\n3. Consultar ofertas especiales \n4. Finalizar su reserva\n0. Salir del sistema de reservas
 msg.seleccionHabitacion=Por favor, seleccione la habitación de su preferencia.
 msg.errorHabitacion=Disculpe, la habitación seleccionada no está disponible. Intente seleccionar una diferente.
@@ -20,4 +22,3 @@ msg.reservar=Reservar habitación
 msg.descripcionAventura=Tirolesa y circuito de cuerdas en Parque Xplor, Snorkel y Tour de ATV's en la selva\nCosto por persona: $5000
 msg.descripcionCultural=Visita a las Ruinas de Tulum, Cenote Sagrado Ik Kil, Show de danzas prehispanicas\nCosto por persona:  $4000
 msg.descripcionRelax=Spa maya, Crucero al atardecer por la Laguna Nichipte, Visita a Isla Mujeres\nCosto por persona: $ 6000
-

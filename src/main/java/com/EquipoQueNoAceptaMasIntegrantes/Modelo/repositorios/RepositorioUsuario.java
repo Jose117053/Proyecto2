@@ -45,9 +45,9 @@ public class RepositorioUsuario implements Repositorio<Usuario> {
         List<Usuario> tempUsuarios;
         try {
             tempUsuarios = List.of(
-                    new Usuario("luisa", "lu123", "Luisa Martinez", "MX"),
-                    new Usuario("rafael", "raf123", "Rafael Martinez", "MX"),
-                    new Usuario("samantha", "lu123", "Sam Martinez", "MX"));
+                    new Usuario("luisa", "lu123", "Luisa Martinez"),
+                    new Usuario("rafael", "raf123", "Rafael Martinez"),
+                    new Usuario("samantha", "lu123", "Sam Martinez"));
         } catch (Exception e) {
             tempUsuarios = new ArrayList<>();
             System.err.println("Error inicializando usuarios: " + e.getMessage());

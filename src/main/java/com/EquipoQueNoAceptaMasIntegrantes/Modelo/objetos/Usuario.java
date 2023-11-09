@@ -21,7 +21,6 @@ public class Usuario implements Serializable, Observador {
     private String username;
     private String password;
     private String nombre;
-    private String codigoPais;
     private Collection<Oferta> ofertasDisponibles;
 
     /**
@@ -37,15 +36,13 @@ public class Usuario implements Serializable, Observador {
     public Usuario(
             String username,
             String password,
-            String nombre,
-            String codigoPais)
+            String nombre)
             throws InterruptedException {
 
         this.id = generarID();
         this.username = username;
         this.password = password;
         this.nombre = nombre;
-        this.codigoPais = codigoPais;
         this.ofertasDisponibles = new ArrayList<>();
     }
 
@@ -71,7 +68,7 @@ public class Usuario implements Serializable, Observador {
     @Override
     public String toString() {
         return String.format(
-                "Usuario [id=%d, username=%s, nombre=%s, codigoPais=%s]",
-                id, username, nombre, codigoPais);
+                "Usuario [id=%d, username=%s, nombre=%s]",
+                id, username, nombre);
     }
 }

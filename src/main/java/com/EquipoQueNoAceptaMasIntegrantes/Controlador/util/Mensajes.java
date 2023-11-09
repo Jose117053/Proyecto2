@@ -10,9 +10,6 @@ import java.util.Properties;
  * La clase Mensajes proporciona métodos utilitarios relacionados con
  * la carga y manipulación de mensajes
  * 
- * @author Allan Jiménez Hernández
- * @author José Luis Raya Pérez
- * @author Alejandra Valentina Arias Villarroel
  */
 public class Mensajes {
 

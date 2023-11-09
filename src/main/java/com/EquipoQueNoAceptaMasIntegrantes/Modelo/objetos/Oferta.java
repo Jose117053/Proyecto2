@@ -1,10 +1,5 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitaciones.Habitacion;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -24,7 +19,6 @@ public class Oferta {
     private String nombreHabitacion;
     private String detalle;
     private double porcentajeDescuento;
-    private String codigoPaisOferta;
 
     /**
      * Constructor por defecto que genera un ID para la oferta.
@@ -56,7 +50,7 @@ public class Oferta {
 
     @Override
     public String toString() {
-        return String.format("Oferta [habitación=%s, detalle=%s, descuento=%s]",
+        return String.format("Oferta [Habitación=%s, %s, Descuento=%s]",
                 nombreHabitacion, detalle, porcentajeDescuento);
     }
 }

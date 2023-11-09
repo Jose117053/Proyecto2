@@ -2,7 +2,6 @@ package com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios;
 
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitaciones.*;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
