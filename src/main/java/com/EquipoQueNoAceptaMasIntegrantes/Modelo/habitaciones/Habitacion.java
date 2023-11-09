@@ -2,11 +2,12 @@ package com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitaciones;
 
 import lombok.Getter;
 import lombok.Setter;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores.ExtraHabitacion;
 
 @Getter
 @Setter
 /** Clase que modela las habitaciones del hotel. */
-public class Habitacion implements Cloneable {
+public class Habitacion implements Cloneable, ExtraHabitacion {
 
     /* El nombre del tipo de habitación. */
     private String nombre;
@@ -72,6 +73,11 @@ public class Habitacion implements Cloneable {
                 "Vista Al mar: " + auxVistaAlmar() + "\n ";
     }
 
+    // Tener cuidado con el costo de habitación vs costo extra.
+    public double costo() {
+        return costo;
+    }
+
     /**
      * Metodo que clona una habitacion ya definida.
      * @return la habitación clonada.
@@ -80,5 +86,10 @@ public class Habitacion implements Cloneable {
     public Habitacion clone() {
         Habitacion clon = new Habitacion(getNombre(), getCosto(), getCapacidad(), getCama(), isVistaAlMar(), isSuite());
         return clon;
+    }
+
+    @Override
+    public String descripcion() {
+        return "";
     }
 }
