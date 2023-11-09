@@ -14,7 +14,9 @@ public class RecepcionHotel {
         RepositorioUsuario repositorioUsuario = RepositorioUsuario.getInstance();
         RepositorioOferta repositorioOferta = RepositorioOferta.getInstance();
         RepositorioHabitacion repositorioHabitacion = RepositorioHabitacion.getInstance();
+
         GeneradorOfertas generadorOfertas = new GeneradorOfertas(repositorioOferta, repositorioHabitacion);
+
         Properties msg = null;
         while (msg == null) {
             System.out.println("Elige tu país / Choose your country (MX/US):");
@@ -22,7 +24,7 @@ public class RecepcionHotel {
 
             // Solo permitir MX o US como entrada válida
             if (!codigoPais.equals("MX") && !codigoPais.equals("US")) {
-                System.out.println("Selección inválida. Por favor, elige entre MX y US.");
+                System.out.println("Selecciona entre MX y US / Choose between MX and US");
                 continue; // Continuar con la siguiente iteración del bucle
             }
 
@@ -36,6 +38,7 @@ public class RecepcionHotel {
         }
 
         System.out.println(msg.getProperty("msg.bienvenida"));
+        RepositorioPaquete repositorioPaquete = RepositorioPaquete.getInstance();
 
         boolean acceso = false;
         Usuario usuario = null;
@@ -44,7 +47,7 @@ public class RecepcionHotel {
         while (!acceso) {
             System.out.println(msg.getProperty("msg.loginUser"));
             String username = scanner.nextLine();
-            System.out.println("Por favor, ingrese su contraseña:");
+            System.out.println(msg.getProperty("msg.loginPass"));
             String password = scanner.nextLine();
 
             usuario = repositorioUsuario.buscarPorUser(username);
@@ -53,37 +56,38 @@ public class RecepcionHotel {
                 acceso = true;
                 System.out.println(msg.getProperty("msg.bienvenida") + usuario.getNombre());
             } else {
-                System.out.println("Nombre de usuario o contraseña incorrectos. Intente nuevamente.");
+                System.out.println(msg.getProperty("msg.errorLogin"));
             }
         }
-
-        // Inicia la simulación de creación de ofertas
         generadorOfertas.simularCreadorOferta();
 
-        // User logged in successfully
-        while (acceso) {
-            System.out.println("\nSeleccione una opción:");
-            System.out.println("1. Ver ofertas");
-            System.out.println("2. Salir");
-            System.out.print("Ingrese el número de la opción deseada: ");
-            String option = scanner.nextLine();
+        boolean sesionActiva = true;
+        while (sesionActiva) {
+            System.out.println(msg.getProperty("msg.menuReservas"));
+            int opcionUsuario = scanner.nextInt();
 
-            switch (option) {
-                case "1":
-                    System.out.println("Cargando ofertas disponibles...");
+            switch (opcionUsuario) {
+                case 1:
+                    repositorioHabitacion.findAll().forEach(System.out::println);
+                    break;
+                case 2:
+                    // Lógica para ver ofertas y promociones especiales
                     repositorioOferta.findAll().forEach(System.out::println);
                     break;
-                case "2":
-                    System.out.println("Saliendo...");
-                    acceso = false;
+                case 3:
+                    repositorioPaquete.findAll().forEach(System.out::println);
+                    break;
+                case 4:
+                    sesionActiva = false;
+                    System.out.println(msg.getProperty("msg.despedida"));
                     break;
                 default:
-                    System.out.println("Opción no reconocida, por favor intente de nuevo.");
+                    // Opción no válida, manejo de error
                     break;
             }
         }
-
         scanner.close();
-        // Cualquier lógica adicional para cerrar aplicaciones o recursos va aquí.
     }
+    // Cualquier lógica adicional para cerrar aplicaciones o recursos va aquí.
+
 }

@@ -34,7 +34,7 @@ public class BDHabitacion {
     public String habitacionesDisponibles() {
         String cadena = "** Habitaciones disponibles **" + "\n ";
         for (Habitacion habitacion : habitaciones)
-            cadena += habitacion.descripcion() + "\n ";
+            cadena += habitacion.toString() + "\n ";
         return cadena;
     }
 }

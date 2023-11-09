@@ -35,7 +35,8 @@ public class Habitacion implements Cloneable {
     /**
      * Metodo que regresa la descripcion de la habitacion
      */
-    public String descripcion() {
+    @Override
+    public String toString() {
         return "Nombre: " + getNombre() + "\n " +
                 "Numero de habitacion: " + getNumero() + "\n " +
                 "Costo: " + getCosto() + "\n " +

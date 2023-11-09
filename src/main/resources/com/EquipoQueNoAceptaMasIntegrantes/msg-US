@@ -1,7 +1,7 @@
 msg.bienvenida=Welcome to our hotel reservation service.
 msg.loginUser=Please, enter your username:
 msg.loginPass=Please, enter your password:
-
+msg.errorLogin=Error, please check your info
 msg.menuReservas=Please select an option: \n1. Check room availability\n2. Make a reservation\n3. View special offers \n4. Complete your reservation\n0. Exit reservation system
 msg.seleccionHabitacion=Please select the room of your choice.
 msg.errorHabitacion=We apologize, the selected room is not available. Please choose a different room.
@@ -14,7 +14,6 @@ msg.errorDatos=The information provided is incorrect or incomplete. Please check
 msg.alertaSeguridad=For security reasons, and after several failed attempts, we will proceed to close the session.
 msg.opcionInvalida=You have selected an invalid option. Please try again.
 msg.sinOfertas=There are currently no offers available. We invite you to check back regularly for future promotions.
-msg.menuReservas=Reservations Menu
 msg.despedida=Thank you for using our reservation system. We look forward to seeing you soon!
 msg.reservaVacia=Your reservation cart is empty. Please add a room to continue with the process.
 msg.fechaLlegada=Your check-in date is:

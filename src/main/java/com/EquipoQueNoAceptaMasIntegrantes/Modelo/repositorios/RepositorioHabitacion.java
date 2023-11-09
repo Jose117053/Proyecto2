@@ -89,7 +89,7 @@ public class RepositorioHabitacion implements Repositorio<Habitacion> {
         String s = "";
 
         for (Habitacion habitacion : nombre) {
-            s += habitacion.descripcion();
+            s += habitacion.toString();
         }
 
         return s;
