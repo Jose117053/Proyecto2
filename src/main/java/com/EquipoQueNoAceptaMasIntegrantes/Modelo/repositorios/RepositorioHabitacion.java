@@ -53,7 +53,7 @@ public class RepositorioHabitacion implements Repositorio<Habitacion> {
         }
 
         // Crear 2 GrandSuites
-        for (int i = 302; i <= 303; i++) {
+        for (int i = 301; i <= 302; i++) {
             habitaciones.add(generador.getHabitacionHotel(bdHabitacion, 3, i)); // 3 representa el tipo 'GrandSuite'
         }
     }
