@@ -335,12 +335,12 @@ public class RecepcionHotel {
 
     private static void seleccionarIdioma() {
         while (true) {
-            System.out.println("Elige tu país / Choose your country (MX/US):");
+            System.out.println("Elige tu país / Choose your country / Escolha seu país (MX/US/BR):");
             codigoPais = scanner.nextLine().trim().toUpperCase();
 
-            // Solo permitir MX o US como entrada válida
-            if (!codigoPais.equals("MX") && !codigoPais.equals("US")) {
-                System.out.println("Selecciona entre MX y US / Choose between MX and US");
+            // Solo permitir MX o US o BR como entrada válida
+            if (!codigoPais.equals("MX") && !codigoPais.equals("US") && !codigoPais.equals("BR")) {
+                System.out.println("Selecciona entre MX, US y BR / Choose between MX, US and BR / Selecione entre MX, US e BR");
                 continue;
             }
 
