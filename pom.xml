@@ -24,8 +24,8 @@
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.8.1</version>
             <configuration>
-                <source>1.8</source> <!-- Versión de Java para compilar -->
-                <target>1.8</target> <!-- Versión de Java para ejecutar -->
+                <source>9</source> <!-- Versión de Java para compilar -->
+                <target>9</target> <!-- Versión de Java para ejecutar -->
             </configuration>
         </plugin>
         <!-- Add the maven-shade-plugin configuration here -->
@@ -53,7 +53,13 @@
         <!-- Other plugins if necessary -->
     </plugins>
 </build>
-
+    <repositories>
+        <repository>
+            <id>unknown-jars-temp-repo</id>
+            <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
+            <url>file:${project.basedir}/lib</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -74,6 +80,11 @@
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>unknown.binary</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

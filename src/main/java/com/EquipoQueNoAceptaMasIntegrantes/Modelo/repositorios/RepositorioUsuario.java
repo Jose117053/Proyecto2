@@ -13,7 +13,7 @@ import java.util.List;
 public class RepositorioUsuario implements Repositorio<Usuario> {
 
     private static volatile RepositorioUsuario uniqueInstance;
-    private final List<Usuario> usuarios;
+    public final List<Usuario> usuarios;
 
     /**
      * Obtiene la única instancia de InventarioUsuario.
@@ -32,7 +32,7 @@ public class RepositorioUsuario implements Repositorio<Usuario> {
     }
 
     // Constructor privado que inicializa la lista de usuarios.
-    private RepositorioUsuario() {
+    public RepositorioUsuario() {
         usuarios = crearUsuarios();
     }
 
@@ -80,4 +80,6 @@ public class RepositorioUsuario implements Repositorio<Usuario> {
                 .findFirst()
                 .orElse(null);
     }
+
+
 }

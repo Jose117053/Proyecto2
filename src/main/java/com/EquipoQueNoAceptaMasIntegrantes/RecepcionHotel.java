@@ -3,13 +3,30 @@ package com.EquipoQueNoAceptaMasIntegrantes;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Scanner;
+
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.ControladorIdioma;
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.ControladorInicio;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.*;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.Usuario;
 import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.GeneradorOfertas;
+import com.EquipoQueNoAceptaMasIntegrantes.Vista.AhoraSi;
+import com.EquipoQueNoAceptaMasIntegrantes.Vista.Idiomas;
 
 public class RecepcionHotel {
     public static void main(String[] args) throws InterruptedException, IOException {
+        Idiomas vista=new Idiomas();
+        Properties msgr=new Properties();
+        ControladorIdioma controlador=new ControladorIdioma(vista, msgr);
+
+        /*
+        AhoraSi vista=new AhoraSi();
+        RepositorioUsuario modelo=new RepositorioUsuario();
+        ControladorInicio controlador= new ControladorInicio(vista, modelo);
+
+         */
+
+        vista.setVisible(true);
         Scanner scanner = new Scanner(System.in);
         RepositorioUsuario repositorioUsuario = RepositorioUsuario.getInstance();
         RepositorioOferta repositorioOferta = RepositorioOferta.getInstance();
