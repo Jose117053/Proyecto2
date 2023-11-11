@@ -4,8 +4,16 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
 
+/** Clase que encarga del manejo del correo del hotel. */
 public class Correo {
 
+    /**
+     * Manda un correo electrónico.
+     * @param to el destinatario del correo.
+     * @param subject el asunto del correo.
+     * @param text el contenido del correo.
+     * @throws MessagingException
+     */
     public static void sendEmail(String to, String subject, String text) throws MessagingException {
         // Configuración de las propiedades del servidor SMTP
         Properties properties = new Properties();
@@ -34,6 +42,15 @@ public class Correo {
         System.out.println("Mensaje enviado exitosamente");
     }
 
+    /**
+     * Prepara el mensaje del correo electrónico.
+     * @param session
+     * @param myAccountEmail el correo electrónico.
+     * @param to el destinatario del correo.
+     * @param subject el asunto del correo.
+     * @param text el contenido del correo.
+     * @return
+     */
     private static Message prepareMessage(Session session, String myAccountEmail, String to, String subject,
             String text) {
         try {

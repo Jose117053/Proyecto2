@@ -1,18 +1,15 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Modelo.paquetes;
 
-/**
- * Clase que simula la fabrica de paquetes
- */
-
+/** Clase que simula la fabrica de paquetes. */
 public class FactoryPaquetes {
+
     /**
-     * Metodo estatico para la creacion de paquetes
-     * 
-     * @param tipo el tipo de paquete a crear
-     * @return el paquete del tipo recibido
+     * Método estático para la creación de paquetes.
+     * @param tipo el tipo de paquete a crear.
+     * @return el paquete del tipo recibido.
      */
-    public static Paquete creaPaquete(int tipo, String codigoPais) {// switch sobre paquetes, 1:aventura 2:cultural
-                                                                    // 3:relax
+    public static Paquete creaPaquete(int tipo, String codigoPais) {
+        // switch sobre paquetes, 1:aventura 2:cultural 3:relax
         switch (tipo) {
             case 1:
                 return new PaqueteAventuraCancun(codigoPais);

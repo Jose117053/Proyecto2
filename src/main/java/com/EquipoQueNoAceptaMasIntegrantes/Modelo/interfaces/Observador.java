@@ -1,10 +1,11 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Modelo.interfaces;
 
-/**
- * Notificado por un Sujeto ante un evento o cambio.
- *
- * @param evento El evento notificado por el Sujeto.
- */
+/** Interfaz observador.  */
 public interface Observador {
+
+    /**
+     * Notifica a los Observadores sobre una oferta.
+     * @param oferta La oferta a notificar.
+     */
     void actualizar(Object oferta);
 }

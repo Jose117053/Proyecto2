@@ -9,21 +9,34 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
-//Clase que genera ofertas aleatorias
+/** Clase que genera ofertas. */
 public class GeneradorOfertas {
 
+    /* Tiempo de separación entre cada oferta. */
     public static final int SEPARACION_OFERTAS = 16000;
+    /* El repositorio de ofertas. */
     private RepositorioOferta repositorioOferta;
+    /* El repositorio de habitaciones. */
     private RepositorioHabitacion repositorioHabitacion;
-
+    /* La lista con los distintos tipos de habitaciones. */
     private List<String> tipo = List.of("Normal", "Suite", "GrandSuite");
+    /* un atributo de tipo Random. */
     private Random random = new Random();
 
+    /**
+     * Constructor.
+     * @param repositorioOferta el repositorio de ofertas.
+     * @param repositorioHabitacion el repositorio de habitaciones.
+     */
     public GeneradorOfertas(RepositorioOferta repositorioOferta, RepositorioHabitacion repositorioHabitacion) {
         this.repositorioOferta = repositorioOferta;
         this.repositorioHabitacion = repositorioHabitacion;
     }
 
+    /**
+     * Método que crea ofertas cada cierto intervalo de tiempo y notifica a los usuarios.
+     * @param codigoPais el código del país.
+     */
     public void simularCreadorOferta(String codigoPais) {
         new Thread(() -> {
             do {
@@ -44,8 +57,15 @@ public class GeneradorOfertas {
         }).start();
     }
 
+    /**
+     * Método que genera oferta al azar.
+     * @param codigoPais el código del país.
+     * @return la oferta generada al azar.
+     * @throws Exception
+     */
     public Oferta crearOfertaRandom(String codigoPais) throws Exception {
         Properties msg = Mensajes.cargarMensajes(codigoPais);
+
         // Seleccionar un tipo de habitación de manera aleatoria.
         int indexTipo = random.nextInt(tipo.size());
         String tipoHabitacionSeleccionado = tipo.get(indexTipo);
@@ -79,5 +99,4 @@ public class GeneradorOfertas {
 
         return oferta;
     }
-
 }
