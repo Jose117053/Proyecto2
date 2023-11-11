@@ -24,8 +24,8 @@
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.8.1</version>
             <configuration>
-                <source>9</source> <!-- Versión de Java para compilar -->
-                <target>9</target> <!-- Versión de Java para ejecutar -->
+                <source>16</source> <!-- Versión de Java para compilar -->
+                <target>16</target> <!-- Versión de Java para ejecutar -->
             </configuration>
         </plugin>
         <!-- Add the maven-shade-plugin configuration here -->

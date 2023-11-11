@@ -9,36 +9,37 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Clase que representa a un usuario
- * Implementa Cloneable, Serializable
- * 
+ * Clase que representa a un usuario.
+ * Implementa Cloneable, Serializable.
  */
 @Getter
 @Setter
 public class Usuario implements Serializable, Observador {
 
+    /* El identificador del usuario. */
     private Long id;
+    /* El nombre de usuario del usuario. */
     private String username;
+    /* La contraseña del usuario. */
     private String password;
+    /* El nombre de pila del usuario. */
     private String nombre;
+    /* La colección de ofertas. */
     private Collection<Oferta> ofertasDisponibles;
 
     /**
      * Constructor para inicializar un nuevo usuario.
-     * 
      * @param username   Nombre de usuario (nickname).
      * @param password   Contraseña asociada a la cuenta del usuario.
      * @param nombre     Nombre real del usuario.
      * @param codigoPais Código que identifica el país del usuario.
-     * @throws InterruptedException si hay una interrupción durante la generación de
-     *                              ID.
+     * @throws InterruptedException si hay una interrupción durante la generación de ID.
      */
     public Usuario(
             String username,
             String password,
             String nombre)
             throws InterruptedException {
-
         this.id = generarID();
         this.username = username;
         this.password = password;
@@ -46,6 +47,9 @@ public class Usuario implements Serializable, Observador {
         this.ofertasDisponibles = new ArrayList<>();
     }
 
+    /**
+     * Actualiza las ofertas.
+     */
     @Override
     public void actualizar(Object oferta) {
         if (oferta instanceof Oferta) {
@@ -55,8 +59,6 @@ public class Usuario implements Serializable, Observador {
 
     /**
      * Genera un identificador único basado en el tiempo actual.
-     * 
-     * 
      * @return ID único basado en el tiempo actual.
      * @throws InterruptedException si el proceso es interrumpido.
      */
@@ -65,6 +67,10 @@ public class Usuario implements Serializable, Observador {
         return System.currentTimeMillis();
     }
 
+    /**
+     * Representación en cadena del usuario.
+     * @return la cadena que representa al usuario.
+     */
     @Override
     public String toString() {
         return String.format(
