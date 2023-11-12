@@ -5,7 +5,8 @@ import lombok.Setter;
 import lombok.AllArgsConstructor;
 
 /**
- * Clase que representa una oferta sobre un producto con un descuento determinado.
+ * Clase que representa una oferta sobre un producto con un descuento
+ * determinado.
  * Es válida hasta una fecha especificada y aplica para un país en particular.
  */
 @Getter
@@ -26,7 +27,9 @@ public class Oferta {
 
     /**
      * Constructor por defecto que genera un ID para la oferta.
-     * @throws InterruptedException si el proceso de generación de ID es interrumpido.
+     * 
+     * @throws InterruptedException si el proceso de generación de ID es
+     *                              interrumpido.
      */
     public Oferta() throws InterruptedException {
         this.id = generarID();
@@ -34,21 +37,24 @@ public class Oferta {
 
     /**
      * Constructor con parámetros.
+     * 
      * @param nombreHabitacion El nombre de la habitación.
-     * @param detalle El detalle de la oferta.
-     * @param porcentaje El porcentaje de descuento de la oferta.
-     * @param codigoPais El código del país.
+     * @param detalle          El detalle de la oferta.
+     * @param porcentaje       El porcentaje de descuento de la oferta.
+     * @param codigoPais       El código del país.
      * @throws InterruptedException
      */
-    public Oferta(String nombreHabitacion, String detalle, double porcentaje, String codigoPais) throws InterruptedException {
+    public Oferta(String nombreHabitacion, String detalle, double porcentaje, String codigoPais)
+            throws InterruptedException {
         this.nombreHabitacion = nombreHabitacion;
         this.detalle = detalle;
         this.porcentajeDescuento = porcentaje;
-        this.codigoPais=codigoPais;
+        this.codigoPais = codigoPais;
     }
 
     /**
      * Genera un identificador único basado en el tiempo actual.
+     * 
      * @return ID único basado en el tiempo actual.
      * @throws InterruptedException si el proceso es interrumpido.
      */
@@ -59,6 +65,7 @@ public class Oferta {
 
     /**
      * Representación en cadena de la oferta.
+     * 
      * @return la oferta en cadena.
      */
     @Override

@@ -4,6 +4,7 @@ import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitaciones.Habitacion;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.*;
 import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
@@ -25,7 +26,8 @@ public class GeneradorOfertas {
 
     /**
      * Constructor.
-     * @param repositorioOferta el repositorio de ofertas.
+     * 
+     * @param repositorioOferta     el repositorio de ofertas.
      * @param repositorioHabitacion el repositorio de habitaciones.
      */
     public GeneradorOfertas(RepositorioOferta repositorioOferta, RepositorioHabitacion repositorioHabitacion) {
@@ -34,10 +36,15 @@ public class GeneradorOfertas {
     }
 
     /**
-     * Método que crea ofertas cada cierto intervalo de tiempo y notifica a los usuarios.
+     * Método que crea ofertas cada cierto intervalo de tiempo y notifica a los
+     * usuarios.
+     * 
      * @param codigoPais el código del país.
+     * @throws IOException
      */
-    public void simularCreadorOferta(String codigoPais) {
+    public void simularCreadorOferta(String codigoPais) throws IOException {
+        Properties msg = Mensajes.cargarMensajes(codigoPais);
+
         new Thread(() -> {
             do {
                 try {
@@ -45,7 +52,7 @@ public class GeneradorOfertas {
                     Oferta oferta = crearOfertaRandom(codigoPais);
                     repositorioOferta.guardar(oferta);
                     System.out.println(
-                            "\nOferta generada para todos los usuarios");
+                            "\n" + msg.getProperty("msg.ofertaNota"));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     System.out.println("Interrupted exception");
@@ -59,6 +66,7 @@ public class GeneradorOfertas {
 
     /**
      * Método que genera oferta al azar.
+     * 
      * @param codigoPais el código del país.
      * @return la oferta generada al azar.
      * @throws Exception
