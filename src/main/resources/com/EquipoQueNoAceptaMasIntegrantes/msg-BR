@@ -43,5 +43,5 @@ msg.verificandoOfertas = Vamos ver se ha ofertas
 msg.encontroOfertas = Parabens, encontramos uma oferta para sua habitacao do
 msg.emailOk = E-mail enviado com sucesso a:
 msg.emailWrong = Erro no e-mail eletronico
-msg.correoInicio = , bem-vindo ao nosso hotel, \nObrigado por reservar conosco\nA seguir, deixo-lhe os detalhes
+msg.correoInicio = Bem-vindo ao nosso hotel, \nObrigado por reservar conosco\nA seguir, deixo-lhe os detalhes
 msg.correoFinal = Muito obrigado por reservar conosco\n Esperamos por voce em breve para desfrutar de umas ferias maravilhosas

@@ -218,7 +218,7 @@ public class RecepcionHotel {
                                         System.out.println(
                                                 habitacionSeleccionada != null ? habitacionSeleccionada.toString()
                                                         : "N/A");
-                                        String correoTexto = usuario.getNombre() + msg.getProperty("msg.correoInicio");
+                                        String correoTexto = msg.getProperty("msg.correoInicio");
 
                                         correoTexto += msg.getProperty("msg.resumen") + "\nNúmero de noches: "
                                                 + numNoches + "\nNúmero de personas: "
@@ -358,7 +358,7 @@ public class RecepcionHotel {
 
             if (usuario != null && usuario.getPassword().equals(password)) {
                 acceso = true;
-                System.out.println(msg.getProperty("msg.bienvenida") + usuario.getNombre());
+                System.out.println(msg.getProperty("msg.bienvenida"));
             } else {
                 System.out.println(msg.getProperty("msg.errorLogin"));
             }
