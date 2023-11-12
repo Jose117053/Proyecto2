@@ -26,15 +26,14 @@ import com.EquipoQueNoAceptaMasIntegrantes.Vista.VistaIdioma;
 
 import javax.mail.MessagingException;
 
-
 public class RecepcionHotel {
     public static void main(String[] args) throws IOException {
         ////////////////////////////////////////
-        VistaIdioma vista=new VistaIdioma();
+        VistaIdioma vista = new VistaIdioma();
         Properties msg = new Properties();
         ControladorIdioma controlador = new ControladorIdioma(vista, msg);
         vista.setVisible(true);
-         //////////////////////////////////////
+        //////////////////////////////////////
         Scanner scanner = new Scanner(System.in);
         RepositorioOferta repositorioOferta = RepositorioOferta.getInstance();
         RepositorioHabitacion repositorioHabitacion = RepositorioHabitacion.getInstance();
@@ -43,6 +42,7 @@ public class RecepcionHotel {
 
         seleccionarIdioma();
         Usuario usuario = login();
+        repositorioOferta.registrar(usuario);
         RepositorioPaquete repositorioPaquete = RepositorioPaquete.getInstance(codigoPais);
         generadorOfertas.simularCreadorOferta(codigoPais);
 
@@ -143,37 +143,37 @@ public class RecepcionHotel {
 
                                     Habitacion habitacionSeleccionada = repositorioHabitacion
                                             .find((long) seleccionHabitacion);
-                                    
-                                    //Implementacion decorator
+
+                                    // Implementacion decorator
                                     int seleccionDeUsuario;
                                     ExtraHabitacion extra = habitacionSeleccionada;
                                     do {
                                         System.out.println(msg.getProperty("msg.menuDecoradores"));
-                                        while(true) {
+                                        while (true) {
                                             try {
                                                 seleccionDeUsuario = Integer.parseInt(scanner.nextLine());
                                                 break;
-                                            }
-                                            catch(NumberFormatException e) {
+                                            } catch (NumberFormatException e) {
                                                 System.out.println(msg.getProperty("msg.opcionNoValida"));
                                             }
                                         }
                                         switch (seleccionDeUsuario) {
-                                            case 1: 
+                                            case 1:
                                                 extra = new Cena(extra);
                                                 break;
-                                            case 2: 
+                                            case 2:
                                                 extra = new Flores(extra);
                                                 break;
-                                            case 3: 
+                                            case 3:
                                                 extra = new Champagne(extra);
                                                 break;
-                                            case 4: 
+                                            case 4:
                                                 extra = new Chocolates(extra);
                                                 break;
-                                            case 0: break;
+                                            case 0:
+                                                break;
                                         }
-                                } while (seleccionDeUsuario != 0);
+                                    } while (seleccionDeUsuario != 0);
 
                                     if (habitacionSeleccionada != null) {
                                         double costoPorNoche = habitacionSeleccionada.costo();
@@ -201,7 +201,10 @@ public class RecepcionHotel {
                                                     descuentoMaximo * 100);
                                         }
 
-                                        double costoTotalSinDescuento = costoPorNoche * numNoches + (extra.costo() - costoPorNoche);
+                                        repositorioOferta.eliminar(usuario);
+
+                                        double costoTotalSinDescuento = costoPorNoche * numNoches
+                                                + (extra.costo() - costoPorNoche);
                                         double descuento = costoTotalSinDescuento * descuentoMaximo;
                                         double costoTotalConDescuento = costoTotalSinDescuento - descuento;
                                         System.out
@@ -387,6 +390,7 @@ public class RecepcionHotel {
 
     private static Usuario login() {
         RepositorioUsuario repositorioUsuario = RepositorioUsuario.getInstance();
+        // RepositorioOferta repositorioOferta = RepositorioOferta.getInstance();
         boolean acceso = false;
         Usuario usuario = null;
 
@@ -401,6 +405,7 @@ public class RecepcionHotel {
             if (usuario != null && usuario.getPassword().equals(password)) {
                 acceso = true;
                 System.out.println(msg.getProperty("msg.bienvenida"));
+                // repositorioOferta.registrar(usuario);
             } else {
                 System.out.println(msg.getProperty("msg.errorLogin"));
             }

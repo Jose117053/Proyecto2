@@ -16,6 +16,8 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
     private final RepositorioUsuario repositorioUsuario;
     /* La lista de ofertas disponibles. */
     private List<Oferta> ofertas;
+    /* Lista para manejar los suscriptores/observadores */
+    private List<Observador> observadores;
 
     private static volatile boolean generarOfertas = true;
 
@@ -28,6 +30,7 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
      */
     private RepositorioOferta() {
         ofertas = new ArrayList<>();
+        observadores = new ArrayList<>(); // Inicializa la lista de observadores
         repositorioUsuario = RepositorioUsuario.getInstance();
     }
 
@@ -38,7 +41,7 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
      */
     public static RepositorioOferta getInstance() {
         if (uniqueInstance == null) {
-            synchronized (RepositorioOferta.class) {
+            synchronized (RepositorioUsuario.class) {
                 if (uniqueInstance == null) {
                     uniqueInstance = new RepositorioOferta();
                 }
@@ -51,7 +54,7 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
      * Método que añade una nueva oferta al repositorio de ofertas e informa a los
      * usuarios sobre ella.
      * 
-     * @param oferta
+     * @param oferta La nueva oferta a guardar.
      */
     public void guardar(Oferta oferta) {
         ofertas.add(oferta);
@@ -61,6 +64,7 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
     /**
      * Devuelve la primera oferta encontrada al buscarla por su identificador.
      * 
+     * @param PK El identificador primario de la oferta.
      * @return la oferta con tal id.
      */
     @Override
@@ -82,15 +86,47 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
     }
 
     /**
-     * Notifica una oferta a todos los usuarios.
+     * Registra un nuevo observador para recibir notificaciones de ofertas.
+     * 
+     * @param observador El observador que se registra.
+     */
+    @Override
+    public void registrar(Observador observador) {
+        synchronized (observadores) {
+            if (!observadores.contains(observador)) {
+                observadores.add(observador);
+            }
+        }
+    }
+
+    /**
+     * Elimina un observador de la lista de suscriptores.
+     * 
+     * @param observador El observador que se elimina.
+     */
+    @Override
+    public void eliminar(Observador observador) {
+        synchronized (observadores) {
+            observadores.remove(observador);
+        }
+    }
+
+    /**
+     * Notifica una oferta a todos los observadores registrados.
+     * 
+     * @param oferta La oferta que se notifica.
      */
     @Override
     public void notificar(Object oferta) {
-        if (!generarOfertas)
+        if (!generarOfertas || !(oferta instanceof Oferta))
             return;
-        if (oferta instanceof Oferta) {
-            repositorioUsuario.findAll()
-                    .forEach(u -> u.actualizar(oferta));
+        List<Observador> copiaObservadores;
+        synchronized (observadores) {
+            copiaObservadores = new ArrayList<>(observadores); // Crear una copia para evitar
+                                                               // ConcurrentModificationException
+        }
+        for (Observador o : copiaObservadores) {
+            o.actualizar(oferta);
         }
     }
 }
