@@ -202,6 +202,7 @@ public class RecepcionHotel {
                                         }
 
                                         repositorioOferta.eliminar(usuario);
+                                        generadorOfertas.detenerGeneradorOfertas();
 
                                         double costoTotalSinDescuento = costoPorNoche * numNoches
                                                 + (extra.costo() - costoPorNoche);
@@ -390,7 +391,6 @@ public class RecepcionHotel {
 
     private static Usuario login() {
         RepositorioUsuario repositorioUsuario = RepositorioUsuario.getInstance();
-        // RepositorioOferta repositorioOferta = RepositorioOferta.getInstance();
         boolean acceso = false;
         Usuario usuario = null;
 
@@ -405,7 +405,6 @@ public class RecepcionHotel {
             if (usuario != null && usuario.getPassword().equals(password)) {
                 acceso = true;
                 System.out.println(msg.getProperty("msg.bienvenida"));
-                // repositorioOferta.registrar(usuario);
             } else {
                 System.out.println(msg.getProperty("msg.errorLogin"));
             }

@@ -19,12 +19,6 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
     /* Lista para manejar los suscriptores/observadores */
     private List<Observador> observadores;
 
-    private static volatile boolean generarOfertas = true;
-
-    public static void detenerGeneracionOfertas() {
-        generarOfertas = false;
-    }
-
     /**
      * Constructor de RepositorioOferta.
      */
@@ -54,17 +48,17 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
      * Método que añade una nueva oferta al repositorio de ofertas e informa a los
      * usuarios sobre ella.
      * 
-     * @param oferta La nueva oferta a guardar.
+     * @param oferta
      */
     public void guardar(Oferta oferta) {
         ofertas.add(oferta);
-        notificar(oferta); // Notificar a todos los observadores que se ha añadido una nueva oferta
+        notificar(oferta); // Notificar solo si se aceptan nuevas ofertas.
     }
 
     /**
      * Devuelve la primera oferta encontrada al buscarla por su identificador.
      * 
-     * @param PK El identificador primario de la oferta.
+     * @param PK
      * @return la oferta con tal id.
      */
     @Override
@@ -93,9 +87,14 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
     @Override
     public void registrar(Observador observador) {
         synchronized (observadores) {
+            System.out.println("Lista de observadores antes de registrar: " + observadores);
+
             if (!observadores.contains(observador)) {
                 observadores.add(observador);
+                System.out.println("Agregado");
             }
+            System.out.println("Lista de observadores después de registrar: " + observadores);
+
         }
     }
 
@@ -107,7 +106,16 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
     @Override
     public void eliminar(Observador observador) {
         synchronized (observadores) {
-            observadores.remove(observador);
+            System.out.println("Lista de observadores antes de eliminar: " + observadores);
+
+            boolean eliminado = observadores.remove(observador);
+            if (eliminado) {
+                System.out.println("Observador eliminado: " + observador);
+            } else {
+                System.out.println("Intento de eliminar un observador que no está en la lista.");
+            }
+            System.out.println("Lista de observadores después de eliminar: " + observadores);
+
         }
     }
 
@@ -118,15 +126,17 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
      */
     @Override
     public void notificar(Object oferta) {
-        if (!generarOfertas || !(oferta instanceof Oferta))
-            return;
         List<Observador> copiaObservadores;
         synchronized (observadores) {
-            copiaObservadores = new ArrayList<>(observadores); // Crear una copia para evitar
-                                                               // ConcurrentModificationException
+            copiaObservadores = new ArrayList<>(observadores);
         }
         for (Observador o : copiaObservadores) {
-            o.actualizar(oferta);
+            // Verificar si el observador aún está registrado antes de notificar
+            synchronized (observadores) {
+                if (observadores.contains(o)) {
+                    o.actualizar(oferta);
+                }
+            }
         }
     }
 }

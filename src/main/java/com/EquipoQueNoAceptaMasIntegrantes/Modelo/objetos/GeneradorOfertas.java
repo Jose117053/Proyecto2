@@ -35,33 +35,37 @@ public class GeneradorOfertas {
         this.repositorioHabitacion = repositorioHabitacion;
     }
 
-    /**
-     * Método que crea ofertas cada cierto intervalo de tiempo y notifica a los
-     * usuarios.
-     * 
-     * @param codigoPais el código del país.
-     * @throws IOException
-     */
+    private Thread hiloGeneradorOfertas;
+    private volatile boolean continuarGenerandoOfertas = true;
+
+    public void detenerGeneradorOfertas() {
+        continuarGenerandoOfertas = false;
+        if (hiloGeneradorOfertas != null) {
+            hiloGeneradorOfertas.interrupt(); // Intenta interrumpir el hilo si está durmiendo o esperando
+        }
+    }
+
     public void simularCreadorOferta(String codigoPais) throws IOException {
         Properties msg = Mensajes.cargarMensajes(codigoPais);
 
-        new Thread(() -> {
-            do {
+        Thread hiloGeneradorOfertas = new Thread(() -> {
+            while (continuarGenerandoOfertas) { // Usa la bandera para controlar el bucle
                 try {
                     Thread.sleep(SEPARACION_OFERTAS);
                     Oferta oferta = crearOfertaRandom(codigoPais);
                     repositorioOferta.guardar(oferta);
-                    System.out.println(
-                            "\n" + msg.getProperty("msg.ofertaNota"));
+                    System.out.println("\n" + msg.getProperty("msg.ofertaNota"));
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    System.out.println("Interrupted exception");
+                    Thread.currentThread().interrupt(); // Restablecer el estado de interrupción
+                    System.out.println("Generación de ofertas interrumpida.");
+                    break; // Salir del bucle si el hilo es interrumpido
                 } catch (Exception e) {
                     e.printStackTrace();
-                    System.out.println("Exception");
+                    System.out.println("Ocurrió una excepción al generar ofertas.");
                 }
-            } while (true);
-        }).start();
+            }
+        });
+        hiloGeneradorOfertas.start();
     }
 
     /**
