@@ -38,11 +38,8 @@ public class RecepcionHotel {
             if (scanner.hasNextInt()) {
                 int opcionUsuario = scanner.nextInt();
                 switch (opcionUsuario) {
-                    case 1:
-                        // Mostrar los 3 tipos de habitación
-                        break;
 
-                    case 2:
+                    case 1:
 
                         System.out.println(msg.getProperty("msg.noches"));
                         int numNoches = 0;
@@ -311,7 +308,7 @@ public class RecepcionHotel {
 
                         break;
 
-                    case 3:
+                    case 2:
                         // Lógica para ver ofertas y promociones especiales
                         List<Oferta> ofertas = (List<Oferta>) repositorioOferta.findAll();
                         if (ofertas.isEmpty()) {
@@ -320,10 +317,10 @@ public class RecepcionHotel {
                             ofertas.forEach(System.out::println);
                         }
                         break;
-                    case 4:
+                    case 3:
                         repositorioPaquete.findAll().forEach(System.out::println);
                         break;
-                    case 5:
+                    case 4:
                         sesionActiva = false;
                         System.out.println(msg.getProperty("msg.despedida"));
                         break;
