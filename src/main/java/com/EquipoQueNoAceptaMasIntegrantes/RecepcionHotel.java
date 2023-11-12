@@ -14,6 +14,11 @@ import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.*;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.Usuario;
 import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Correo;
 import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores.Cena;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores.Champagne;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores.Chocolates;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores.ExtraHabitacion;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores.Flores;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitaciones.Habitacion;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.GeneradorOfertas;
 
@@ -138,11 +143,41 @@ public class RecepcionHotel {
 
                                     Habitacion habitacionSeleccionada = repositorioHabitacion
                                             .find((long) seleccionHabitacion);
-                                    // Aquí implementar logica del decorator
+                                    
+                                    //Implementacion decorator
+                                    int seleccionDeUsuario;
+                                    ExtraHabitacion extra = habitacionSeleccionada;
+                                    do {
+                                        System.out.println(msg.getProperty("msg.menuDecoradores"));
+                                        while(true) {
+                                            try {
+                                                seleccionDeUsuario = Integer.parseInt(scanner.nextLine());
+                                                break;
+                                            }
+                                            catch(NumberFormatException e) {
+                                                System.out.println(msg.getProperty("msg.opcionNoValida"));
+                                            }
+                                        }
+                                        switch (seleccionDeUsuario) {
+                                            case 1: 
+                                                extra = new Cena(extra);
+                                                break;
+                                            case 2: 
+                                                extra = new Flores(extra);
+                                                break;
+                                            case 3: 
+                                                extra = new Champagne(extra);
+                                                break;
+                                            case 4: 
+                                                extra = new Chocolates(extra);
+                                                break;
+                                            case 0: break;
+                                        }
+                                } while (seleccionDeUsuario != 0);
 
                                     if (habitacionSeleccionada != null) {
-                                        double costoPorNoche = habitacionSeleccionada.getCosto();
-                                        double costoTotal = costoPorNoche * numNoches;
+                                        double costoPorNoche = habitacionSeleccionada.costo();
+                                        double costoTotal = costoPorNoche * numNoches + (extra.costo() - costoPorNoche);
 
                                         // Muestra el costo total al usuario
                                         System.out
@@ -166,7 +201,7 @@ public class RecepcionHotel {
                                                     descuentoMaximo * 100);
                                         }
 
-                                        double costoTotalSinDescuento = habitacionSeleccionada.getCosto() * numNoches;
+                                        double costoTotalSinDescuento = costoPorNoche * numNoches + (extra.costo() - costoPorNoche);
                                         double descuento = costoTotalSinDescuento * descuentoMaximo;
                                         double costoTotalConDescuento = costoTotalSinDescuento - descuento;
                                         System.out
@@ -223,7 +258,7 @@ public class RecepcionHotel {
                                         System.out.println(msg.getProperty("msg.resumen"));
                                         System.out.println(msg.getProperty("msg.resumenHabitacion"));
                                         System.out.println(
-                                                habitacionSeleccionada != null ? habitacionSeleccionada.toString()
+                                                habitacionSeleccionada != null ? extra.descripcion(codigoPais)
                                                         : "N/A");
                                         String correoTexto = msg.getProperty("msg.correoInicio");
 
@@ -231,7 +266,7 @@ public class RecepcionHotel {
                                                 + numNoches + "\nNúmero de personas: "
                                                 + numPersonas + "\n"
                                                 + msg.getProperty("msg.resumenHabitacion") + "\n"
-                                                + (habitacionSeleccionada != null ? habitacionSeleccionada.toString()
+                                                + (habitacionSeleccionada != null ? extra.descripcion(codigoPais)
                                                         : "N/A");
 
                                         // Verificar si se seleccionó un paquete y mostrar detalles

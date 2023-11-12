@@ -88,8 +88,19 @@ public class Habitacion implements Cloneable, ExtraHabitacion {
         return clon;
     }
 
+    /**
+     * 
+     * @param codigoPais
+     * @returns
+     */
     @Override
-    public String descripcion() {
-        return "";
+    public String descripcion(String codigoPais) {
+        return "Nombre: " + getNombre() + "\n " +
+               "Numero de habitacion: " + getNumero() + "\n " +
+               "Costo: " + getCosto() + "\n " +
+               "Capacidad:" + getCapacidad() + "\n " +
+               "Cama: " + getCama() + "\n " +
+               "Suite: " + auxSuite() + "\n " +
+               "Vista Al mar: " + auxVistaAlmar() + "\n ";
     }
 }

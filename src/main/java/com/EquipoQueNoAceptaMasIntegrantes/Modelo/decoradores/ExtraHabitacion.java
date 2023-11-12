@@ -1,5 +1,7 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores;
 
+import java.io.IOException;
+
 /**
  * Interfaz encargada de definir los métodos para obtener la descripción y costo de los diferentes
  * servicios que incluye o se le pueden agregar a una habitación al momento de reservarla.
@@ -12,7 +14,7 @@ public interface ExtraHabitacion {
      * @returns una representación en cadena con la descripción de todos los servicios incluídos
      *          en la habitación que se está reservando.
      */
-    public String descripcion();
+    public String descripcion(String codigoPais) throws IOException;
 
     /**
      * Método encargado de definir el costo del servicio extra que se esta solicitando.

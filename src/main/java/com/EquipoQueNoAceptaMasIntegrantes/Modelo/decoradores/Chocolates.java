@@ -1,5 +1,9 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores;
 
+import java.io.IOException;
+
+import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
+
 /**
  * Clase Chocolates que hereda de la clase HabitacionDecorator, encargada de definir un servicio
  * extra que se ofrece al hospedarse en el hotel, definira lo que incluye así como su costo.
@@ -20,8 +24,9 @@ public class Chocolates extends HabitacionDecorator {
      * @returns una representación en cadena con la descripción de todos los servicios incluídos
      *          en la habitación que se está reservando.
      */
-    @Override public String descripcion() {
-        return habitacion.descripcion() + "\nCaja de chocolates.";
+    @Override public String descripcion(String codigoPais) throws IOException {
+        String chocolates = Mensajes.cargarMensajes(codigoPais).getProperty("msg.chocolates");
+        return habitacion.descripcion(codigoPais) + chocolates;
     }
 
     /**

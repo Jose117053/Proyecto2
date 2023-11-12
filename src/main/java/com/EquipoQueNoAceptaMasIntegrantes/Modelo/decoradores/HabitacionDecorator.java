@@ -1,5 +1,7 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores;
 
+import java.io.IOException;
+
 /**
  * Clase abstracta que implementa a la interfaz ExtraHabitacion, encargada de definir a los
  * métodos descripcion y costo para un objeto de tipo ExtraHabitacion.
@@ -22,8 +24,8 @@ public abstract class HabitacionDecorator implements ExtraHabitacion {
      * @return una representación en cadena con la descripción de una habitación antes
      *         de que se le agregue algún decorador.
      */
-    public String descripcion() {
-        return habitacion.descripcion();
+    public String descripcion(String codigoPais) throws IOException{
+        return habitacion.descripcion(codigoPais);
     }
 
     /**
