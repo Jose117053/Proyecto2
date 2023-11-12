@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
 
@@ -22,14 +23,13 @@ public class RecepcionHotel {
         Scanner scanner = new Scanner(System.in);
         RepositorioOferta repositorioOferta = RepositorioOferta.getInstance();
         RepositorioHabitacion repositorioHabitacion = RepositorioHabitacion.getInstance();
-        RepositorioPaquete repositorioPaquete = RepositorioPaquete.getInstance(codigoPais);
 
         GeneradorOfertas generadorOfertas = new GeneradorOfertas(repositorioOferta, repositorioHabitacion);
 
         seleccionarIdioma();
         Usuario usuario = login();
-
-        // generadorOfertas.simularCreadorOferta(codigoPais); NO ELIMINAR
+        RepositorioPaquete repositorioPaquete = RepositorioPaquete.getInstance(codigoPais);
+        generadorOfertas.simularCreadorOferta(codigoPais);
 
         boolean sesionActiva = true;
         while (sesionActiva) {
@@ -131,6 +131,7 @@ public class RecepcionHotel {
 
                                     Habitacion habitacionSeleccionada = repositorioHabitacion
                                             .find((long) seleccionHabitacion);
+                                    // Aquí implementar logica del decorator
 
                                     if (habitacionSeleccionada != null) {
                                         double costoPorNoche = habitacionSeleccionada.getCosto();
@@ -141,7 +142,29 @@ public class RecepcionHotel {
                                                 .println(msg.getProperty("msg.costoNoches"));
                                         System.out.println(costoTotal + "USD");
 
-                                        // Aquí implementar logica del decorator
+                                        System.out.println(msg.getProperty("msg.verificandoOfertas"));
+                                        List<Oferta> ofertasAplicables = repositorioOferta.findAll().stream()
+                                                .filter(oferta -> oferta.getNombreHabitacion()
+                                                        .equals(habitacionSeleccionada.getNombre()))
+                                                .collect(Collectors.toList());
+                                        // Determinar la oferta con el mayor descuento
+                                        double descuentoMaximo = ofertasAplicables.stream()
+                                                .mapToDouble(Oferta::getPorcentajeDescuento)
+                                                .max()
+                                                .orElse(0.0); // Si no hay ofertas, el descuento máximo es 0.
+
+                                        // Aplicar el descuento más alto al costo total si hay alguna oferta
+                                        if (descuentoMaximo > 0) {
+                                            System.out.printf(msg.getProperty("msg.encontroOfertas") + " %.0f%%\n",
+                                                    descuentoMaximo * 100);
+                                        }
+
+                                        double costoTotalSinDescuento = habitacionSeleccionada.getCosto() * numNoches;
+                                        double descuento = costoTotalSinDescuento * descuentoMaximo;
+                                        double costoTotalConDescuento = costoTotalSinDescuento - descuento;
+                                        System.out
+                                                .println(msg.getProperty("msg.costoNoches"));
+                                        System.out.println(costoTotalConDescuento + "USD");
 
                                         System.out.println(msg.getProperty("msg.elegirPaquetes"));
                                         repositorioPaquete.findAll().forEach(System.out::println);
@@ -184,7 +207,7 @@ public class RecepcionHotel {
                                         }
 
                                         // Calcula el costo total sumando el costo de la habitación y el paquete
-                                        double costoReservacionTotal = costoTotal + costoPaquete;
+                                        double costoReservacionTotal = costoTotalConDescuento + costoPaquete;
 
                                         // Muestra el costo total de la reservación al usuario
                                         System.out.println(msg.getProperty("msg.costoTotal") + costoReservacionTotal
@@ -195,8 +218,8 @@ public class RecepcionHotel {
                                         System.out.println(
                                                 habitacionSeleccionada != null ? habitacionSeleccionada.toString()
                                                         : "N/A");
-                                        String correoTexto = "Bienvenido a nuestro hotel, " + usuario.getNombre()
-                                                + "\nGracias por reservar con nosotros\nA continuación, te dejo los detalles";
+                                        String correoTexto = usuario.getNombre() + msg.getProperty("msg.correoInicio");
+
                                         correoTexto += msg.getProperty("msg.resumen") + "\nNúmero de noches: "
                                                 + numNoches + "\nNúmero de personas: "
                                                 + numPersonas + "\n"
@@ -228,24 +251,43 @@ public class RecepcionHotel {
                                                 + " USD.");
                                         correoTexto += "\n" + msg.getProperty("msg.costoTotal") + costoReservacionTotal
                                                 + " USD.";
-                                        correoTexto += "Muchas gracias por reservar con nosotros\n Te esperamos pronto para disfrutar unas maravillosas vacaciones";
+                                        correoTexto += msg.getProperty("msg.correoFinal");
 
                                         // Preguntar al usuario si desea confirmar la reserva
                                         System.out.println(msg.getProperty("msg.confirmar"));
                                         int confirmacion = scanner.nextInt();
 
                                         if (confirmacion == 1) {
-                                            // Solicitar correo electrónico y enviar información de la reserva
+                                            boolean emailValido = false;
+                                            String email = "";
                                             System.out.println(msg.getProperty("msg.email"));
-                                            String email = scanner.next(); // Leer el correo electrónico del usuario
-                                            try {
-                                                Correo.sendEmail(email, "Reservación Hotel", correoTexto);
-                                                System.out.println("Correo enviado exitosamente a: " + email);
-                                            } catch (MessagingException e) {
-                                                System.out.println(
-                                                        "Error al enviar el correo electrónico: " + e.getMessage());
+
+                                            // Bucle hasta que se introduzca un email válido
+                                            while (!emailValido) {
+                                                email = scanner.next(); // Leer el correo electrónico del usuario
+
+                                                // Verificar si el formato del email es válido
+                                                emailValido = email
+                                                        .matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}");
+                                                if (!emailValido) {
+                                                    System.out.println(msg.getProperty("msg.emailWrong"));
+                                                    System.out.println(msg.getProperty("msg.email"));
+                                                } else {
+                                                    // Intentar enviar el email solo si el formato es correcto
+                                                    try {
+                                                        Correo.sendEmail(email, "Reservación Hotel", correoTexto);
+                                                        System.out.println(msg.getProperty("msg.emailOk") + email);
+                                                    } catch (MessagingException e) {
+                                                        System.out.println(
+                                                                msg.getProperty("msg.emailWrong") + e.getMessage());
+                                                        emailValido = false; // Si falla el envío, permite reintentar
+                                                                             // con un nuevo email
+                                                    }
+                                                    if (emailValido) {
+                                                        System.out.println(msg.getProperty("msg.enviado") + email);
+                                                    }
+                                                }
                                             }
-                                            System.out.println(msg.getProperty("msg.enviado") + email);
                                         } else {
                                             // Regresar al menú
                                             System.out.println(msg.getProperty("msg.cancelacion"));
@@ -340,7 +382,8 @@ public class RecepcionHotel {
 
             // Solo permitir MX o US o BR como entrada válida
             if (!codigoPais.equals("MX") && !codigoPais.equals("US") && !codigoPais.equals("BR")) {
-                System.out.println("Selecciona entre MX, US y BR / Choose between MX, US and BR / Selecione entre MX, US e BR");
+                System.out.println(
+                        "Selecciona entre MX, US y BR / Choose between MX, US and BR / Selecione entre MX, US e BR");
                 continue;
             }
 

@@ -17,6 +17,12 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
     /* La lista de ofertas disponibles. */
     private List<Oferta> ofertas;
 
+    private static volatile boolean generarOfertas = true;
+
+    public static void detenerGeneracionOfertas() {
+        generarOfertas = false;
+    }
+
     /**
      * Constructor de RepositorioOferta.
      */
@@ -27,6 +33,7 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
 
     /**
      * Método que devuelve la única instancia de RepositorioOferta.
+     * 
      * @return la única instancia de RepositorioOferta.
      */
     public static RepositorioOferta getInstance() {
@@ -41,7 +48,9 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
     }
 
     /**
-     * Método que añade una nueva oferta al repositorio de ofertas e informa a los usuarios sobre ella.
+     * Método que añade una nueva oferta al repositorio de ofertas e informa a los
+     * usuarios sobre ella.
+     * 
      * @param oferta
      */
     public void guardar(Oferta oferta) {
@@ -51,6 +60,7 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
 
     /**
      * Devuelve la primera oferta encontrada al buscarla por su identificador.
+     * 
      * @return la oferta con tal id.
      */
     @Override
@@ -63,6 +73,7 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
 
     /**
      * Devuelve todas las ofertas que hay en el momento de consulta.
+     * 
      * @return la lista de todas las ofertas.
      */
     @Override
@@ -75,6 +86,8 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
      */
     @Override
     public void notificar(Object oferta) {
+        if (!generarOfertas)
+            return;
         if (oferta instanceof Oferta) {
             repositorioUsuario.findAll()
                     .forEach(u -> u.actualizar(oferta));
