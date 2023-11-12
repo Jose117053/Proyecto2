@@ -1,4 +1,4 @@
-msg.bienvenida=Bem-vindo ao nosso servico de reservas de hotel,
+msg.bienvenida=<html>Bem-vindo ao nosso servico de reservas de hotel, faça login para continuar<html>
 msg.loginUser=Por favor insira seu nome de usuario:
 msg.loginPass=Por favor, insira sua senha:
 msg.errorLogin=Ocorreu um erro, verifique seus dados

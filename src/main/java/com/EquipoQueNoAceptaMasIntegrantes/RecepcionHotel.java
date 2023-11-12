@@ -16,15 +16,19 @@ import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitaciones.Habitacion;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.GeneradorOfertas;
 
-import com.EquipoQueNoAceptaMasIntegrantes.Vista.AhoraSi;
-import com.EquipoQueNoAceptaMasIntegrantes.Vista.Idiomas;
+import com.EquipoQueNoAceptaMasIntegrantes.Vista.VistaIdioma;
 
 import javax.mail.MessagingException;
 
 
 public class RecepcionHotel {
     public static void main(String[] args) throws IOException {
-
+        ////////////////////////////////////////
+        VistaIdioma vista=new VistaIdioma();
+        Properties msg = new Properties();
+        ControladorIdioma controlador = new ControladorIdioma(vista, msg);
+        vista.setVisible(true);
+         //////////////////////////////////////
         Scanner scanner = new Scanner(System.in);
         RepositorioOferta repositorioOferta = RepositorioOferta.getInstance();
         RepositorioHabitacion repositorioHabitacion = RepositorioHabitacion.getInstance();

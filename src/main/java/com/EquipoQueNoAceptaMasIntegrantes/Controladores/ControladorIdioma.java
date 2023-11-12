@@ -2,8 +2,8 @@ package com.EquipoQueNoAceptaMasIntegrantes.Controladores;
 
 import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.RepositorioUsuario;
-import com.EquipoQueNoAceptaMasIntegrantes.Vista.AhoraSi;
-import com.EquipoQueNoAceptaMasIntegrantes.Vista.Idiomas;
+import com.EquipoQueNoAceptaMasIntegrantes.Vista.VistaIdioma;
+import com.EquipoQueNoAceptaMasIntegrantes.Vista.VistaLogin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,27 +12,35 @@ import java.util.Properties;
 
 public class ControladorIdioma implements ActionListener {
 
-    private Idiomas vista;
+    private VistaIdioma vista;
     public static Properties msg;
 
-    public ControladorIdioma(Idiomas vista, Properties msg){
+    public ControladorIdioma(VistaIdioma vista, Properties msg) throws IOException {
         this.vista=vista;
         ControladorIdioma.msg =msg;
         this.vista.addActionListener(this);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String idioma= actionEvent.getActionCommand();
         try {
-            if (idioma.equals("espaniol"))
+            if (idioma.equals("Espanol"))
                 msg = Mensajes.cargarMensajes("MX");
-            else
+            else if(idioma.equals("English"))
                 msg = Mensajes.cargarMensajes("US");
+            else
+                msg = Mensajes.cargarMensajes("BR");
         }catch (IOException e){
             System.out.println("kjlfdjklfdjslkf");
         }
-        this.vista.prueba();
+        try {
+            VistaLogin login=new VistaLogin();
+            ControladorInicio controlador= new ControladorInicio(login,new RepositorioUsuario());
+            this.vista.setVisible(false);
+            login.setVisible(true);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
