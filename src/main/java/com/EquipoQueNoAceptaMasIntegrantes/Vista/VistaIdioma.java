@@ -33,6 +33,12 @@ public class VistaIdioma extends javax.swing.JFrame {
         labelname.setIcon(new ImageIcon(image.getImage().getScaledInstance(labelname.getWidth(),labelname.getHeight(), Image.SCALE_DEFAULT)));
 
     }
+    public void cambiarImagenLabel(VistaLogin vista){
+        jPanel1.removeAll();
+        jPanel1.add(vista, BorderLayout.CENTER);
+        jPanel1.revalidate();
+        jPanel1.repaint();
+    }
 
 
 

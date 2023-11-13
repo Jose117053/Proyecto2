@@ -53,3 +53,7 @@ msg.emailOk = Email sent successfully to:
 msg.emailWrong = Error in the email address
 msg.correoInicio = Welcome to our hotel, \nThank you for booking with us\nHere are the details
 msg.correoFinal = Thank you very much for booking with us\n We look forward to seeing you soon for a wonderful vacation
+msg.Cena=Dinner
+msg.Champagne=Champagne
+msg.Chocolates=Chocolates
+msg.Flores=Flowers

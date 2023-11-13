@@ -53,3 +53,7 @@ msg.emailOk = E-mail enviado com sucesso a:
 msg.emailWrong = Erro no e-mail eletronico
 msg.correoInicio = Bem-vindo ao nosso hotel, \nObrigado por reservar conosco\nA seguir, deixo-lhe os detalhes
 msg.correoFinal = Muito obrigado por reservar conosco\n Esperamos por voce em breve para desfrutar de umas ferias maravilhosas
+msg.Cena=Jantar
+msg.Champagne=Champanhe
+msg.Chocolates=Chocolates
+msg.Flores=Flores

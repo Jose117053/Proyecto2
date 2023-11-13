@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.ControladorIdioma;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.Paquete;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.Oferta;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.*;
@@ -19,15 +21,17 @@ import com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores.ExtraHabitacion;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores.Flores;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.Habitacion;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.GeneradorOfertas;
+import com.EquipoQueNoAceptaMasIntegrantes.Vista.VistaIdioma;
+
 import javax.mail.MessagingException;
 
 public class RecepcionHotel {
     public static void main(String[] args) throws IOException {
         ////////////////////////////////////////
-        // VistaIdioma vista=new VistaIdioma();
-        // Properties msg = new Properties();
-        // ControladorIdioma controlador = new ControladorIdioma(vista, msg);
-        // vista.setVisible(true);
+         VistaIdioma vista=new VistaIdioma();
+         Properties msg = new Properties();
+         ControladorIdioma controlador = new ControladorIdioma(vista, msg);
+         vista.setVisible(true);
         //////////////////////////////////////
         Scanner scanner = new Scanner(System.in);
         RepositorioOferta repositorioOferta = RepositorioOferta.getInstance();

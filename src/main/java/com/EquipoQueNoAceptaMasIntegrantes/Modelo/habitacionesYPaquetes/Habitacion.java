@@ -64,13 +64,13 @@ public class Habitacion implements Cloneable, ExtraHabitacion {
      */
     @Override
     public String toString() {
-        return "Nombre: " + getNombre() + "\n " +
-                "Numero de habitacion: " + getNumero() + "\n " +
-                "Costo: " + getCosto() + "\n " +
-                "Capacidad:" + getCapacidad() + "\n " +
-                "Cama: " + getCama() + "\n " +
-                "Suite: " + auxSuite() + "\n " +
-                "Vista Al mar: " + auxVistaAlmar() + "\n ";
+        return "<html>Nombre: " + getNombre() + "<p>" +
+                "Numero de habitacion: " + getNumero() + "<p>" +
+                "Costo: " + getCosto() + "<p>" +
+                "Capacidad:" + getCapacidad() + "<p>" +
+                "Cama: " + getCama() + "<p>" +
+                "Suite: " + auxSuite() + "<p>" +
+                "Vista Al mar: " + auxVistaAlmar() + "<p> <p> <html>";
     }
 
     // Tener cuidado con el costo de habitación vs costo extra.

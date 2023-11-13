@@ -2,6 +2,7 @@ package com.EquipoQueNoAceptaMasIntegrantes.Controladores;
 
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.RepositorioUsuario;
 import com.EquipoQueNoAceptaMasIntegrantes.Vista.VistaLogin;
+import com.EquipoQueNoAceptaMasIntegrantes.Vista.VistaMenuGeneral;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,19 +25,20 @@ public class ControladorInicio implements ActionListener{
     public void actionPerformed(ActionEvent actionEvent) {
         String nombre;
 
-        try{
+
             nombre=vista.getUsuario();
             if(modelo.buscarPorUser(nombre) !=null) {
-               vista.metodoPruebaDeLogin("coincide usario");
+               this.vista.setVisible(false);
+                VistaMenuGeneral vista = new VistaMenuGeneral();
+                ControladorMenuGeneral controlador= new ControladorMenuGeneral(vista);
+                vista.setVisible(true);
             }else{
                 vista.metodoPruebaDeLogin("No coincide usuario");
             }
-        }catch (Exception e){
-            System.out.println("jfkasjk fdasljk errorcambiar esto a no coinciden nombre");
         }
 
 
-    }
+
 
 
 
