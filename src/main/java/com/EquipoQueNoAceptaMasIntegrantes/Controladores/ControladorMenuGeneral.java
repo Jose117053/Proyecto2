@@ -6,49 +6,57 @@ import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.RepositorioUsuari
 import com.EquipoQueNoAceptaMasIntegrantes.Vista.VistaHabitaciones;
 import com.EquipoQueNoAceptaMasIntegrantes.Vista.VistaLogin;
 import com.EquipoQueNoAceptaMasIntegrantes.Vista.VistaMenuGeneral;
+import com.EquipoQueNoAceptaMasIntegrantes.Vista.VistaOfertas;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Timer;
 
-public class ControladorMenuGeneral implements ActionListener {
+public class ControladorMenuGeneral {
     VistaMenuGeneral vista;
 
     public ControladorMenuGeneral(VistaMenuGeneral vista){
         this.vista=vista;
-        this.vista.addActionListener(this);
+        modelarAcciones();
+        accionNotificarOfertas();
     }
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        String idioma= actionEvent.getActionCommand();
-        Object  vista=null;
-        Object  modelo=null;
-        Object controlador=null;
+    public void modelarAcciones(){
+        vista.addActionListenerEspecifico(vista.getBotonHabitaciones(), accionVerHabitaciones());
+        vista.addActionListenerEspecifico(vista.getBotonOfertas(), accionVerOfertas());
+    }
+    public ActionListener accionVerHabitaciones(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                vista.setVisible(false);
+                VistaHabitaciones vistaHabitaciones=new VistaHabitaciones();
+                RepositorioHabitacion repositorioHabitacion=new RepositorioHabitacion();
+                ControladorHabitaciones controladorHabitaciones=new ControladorHabitaciones(vistaHabitaciones, repositorioHabitacion);
+                vistaHabitaciones.setVisible(true);
+            }
+        };
+    }
 
-        if (idioma.equals("Habitaciones")) {
-            vista=new VistaHabitaciones();
-            modelo=new RepositorioHabitacion();
-            controlador=new ControladorHabitaciones((VistaHabitaciones) vista, (RepositorioHabitacion) modelo);
-            this.vista.setVisible(false);
-            ((VistaHabitaciones) vista).setVisible(true);
-        }
-        else if(idioma.equals("Ofertas")){
+    public ActionListener accionVerOfertas(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                vista.setVisible(false);
+                VistaOfertas vistaOfertas=new VistaOfertas();
+                vistaOfertas.setVisible(true);
+                ControladorOfertas controladorOfertas=new ControladorOfertas(vistaOfertas);
+                vistaOfertas.imprimirOfertas();
+            }
+        };
+    }
 
-            System.out.println("hacer clases de vista de oferta");
-        }
-
-
-
-        /*
-        VistaHabitaciones vista = new VistaHabitaciones();
-        vista.setSize(900,720);
-        vista.setLocation(0,0);
-        panel.removeAll();
-        panel.add(vista, BorderLayout.CENTER);
-        panel.revalidate();
-        panel.repaint();
-
-         */
+    public void accionNotificarOfertas(){
+                try {
+                    ControladorInicio.generadorOfertas.simularCreadorOferta(ControladorIdioma.codigoPais, vista);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
     }
 }

@@ -70,7 +70,7 @@ public class Oferta {
      */
     @Override
     public String toString() {
-        return String.format("Oferta [Habitación=%s, %s, Descuento=%s]",
+        return String.format("<html>Oferta [Habitación=%s, %s, Descuento=%s]<html>",
                 nombreHabitacion, detalle, porcentajeDescuento);
     }
 }

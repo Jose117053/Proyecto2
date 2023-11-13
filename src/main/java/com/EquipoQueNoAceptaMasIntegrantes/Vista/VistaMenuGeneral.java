@@ -4,9 +4,14 @@
  */
 package com.EquipoQueNoAceptaMasIntegrantes.Vista;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+@Getter
+@Setter
 
 /**
  *
@@ -30,11 +35,18 @@ public class VistaMenuGeneral extends javax.swing.JFrame {
          */
 
     }
-    public void addActionListener(ActionListener controladorIdioma) {
-        botonHabitaciones.addActionListener(controladorIdioma);
-        botonOfertas.addActionListener(controladorIdioma);
-        botonPaquetes.addActionListener(controladorIdioma);
-        botonSalir.addActionListener(controladorIdioma);
+    public void addActionListener(ActionListener controladorMenu) {
+
+        botonHabitaciones.addActionListener(controladorMenu);
+        botonOfertas.addActionListener(controladorMenu);
+        botonPaquetes.addActionListener(controladorMenu);
+        botonSalir.addActionListener(controladorMenu);
+    }
+    public void addActionListenerEspecifico(JButton boton, ActionListener accion){
+        boton.addActionListener(accion);
+    }
+    public void labelNotificadorDeOfertas(String cadena){
+        labelOfertas.setText(cadena);
     }
 
     /**
@@ -51,6 +63,7 @@ public class VistaMenuGeneral extends javax.swing.JFrame {
         botonSalir = new javax.swing.JButton();
         botonHabitaciones = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        labelOfertas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,19 +98,26 @@ public class VistaMenuGeneral extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonOfertas, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonOfertas, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(labelOfertas, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(162, 162, 162)
+                .addGap(29, 29, 29)
+                .addComponent(labelOfertas, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addComponent(botonHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonOfertas, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,5 +142,6 @@ public class VistaMenuGeneral extends javax.swing.JFrame {
     private javax.swing.JButton botonPaquetes;
     private javax.swing.JButton botonSalir;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelOfertas;
     // End of variables declaration//GEN-END:variables
 }

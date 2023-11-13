@@ -3,6 +3,8 @@ package com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.Habitacion;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.*;
 import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
+import com.EquipoQueNoAceptaMasIntegrantes.Vista.VistaMenuGeneral;
+import com.EquipoQueNoAceptaMasIntegrantes.Vista.VistaOfertas;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -23,6 +25,8 @@ public class GeneradorOfertas {
     private List<String> tipo = List.of("Normal", "Suite", "GrandSuite");
     /* un atributo de tipo Random. */
     private Random random = new Random();
+
+    static String notaOferta;
 
     /**
      * Constructor.
@@ -45,7 +49,7 @@ public class GeneradorOfertas {
         }
     }
 
-    public void simularCreadorOferta(String codigoPais) throws IOException {
+    public void simularCreadorOferta(String codigoPais, VistaMenuGeneral vistaMenuGeneral) throws IOException {
         Properties msg = Mensajes.cargarMensajes(codigoPais);
 
         Thread hiloGeneradorOfertas = new Thread(() -> {
@@ -54,10 +58,12 @@ public class GeneradorOfertas {
                     Thread.sleep(SEPARACION_OFERTAS);
                     Oferta oferta = crearOfertaRandom(codigoPais);
                     repositorioOferta.guardar(oferta);
+                    vistaMenuGeneral.labelNotificadorDeOfertas(msg.getProperty("msg.ofertaNota"));
                     System.out.println("\n" + msg.getProperty("msg.ofertaNota"));
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt(); // Restablecer el estado de interrupción
-                    System.out.println("Generación de ofertas interrumpida.");
+                    vistaMenuGeneral.labelNotificadorDeOfertas("Gneracion de ofertas interrumpida");
+                   // System.out.println("Generación de ofertas interrumpida.");
                     break; // Salir del bucle si el hilo es interrumpido
                 } catch (Exception e) {
                     e.printStackTrace();

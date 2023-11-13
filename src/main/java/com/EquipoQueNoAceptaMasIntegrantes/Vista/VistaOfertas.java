@@ -4,6 +4,18 @@
  */
 package com.EquipoQueNoAceptaMasIntegrantes.Vista;
 
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.ControladorIdioma;
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.ControladorInicio;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.Oferta;
+import lombok.Getter;
+
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Getter
+
 /**
  *
  * @author Jose
@@ -17,6 +29,21 @@ public class VistaOfertas extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void addActionListenerEspecifico(JButton boton, ActionListener accion){
+        boton.addActionListener(accion);
+    }
+
+    public void imprimirOfertas(){
+        List<Oferta> ofertas=(List<Oferta>) ControladorInicio.repositorioOferta.findAll();
+        if (ofertas.isEmpty()) {
+            labelOfertas.setText(ControladorIdioma.msg.getProperty("msg.sinOfertas"));
+         //   System.out.println(ControladorIdioma.msg.getProperty("msg.sinOfertas"));
+        } else {
+            String ofertasString=ofertas.stream().map(Oferta::toString).collect(Collectors.joining("<p>"));
+            labelOfertas.setText(ofertasString);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,57 +53,38 @@ public class VistaOfertas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        labelOfertas = new javax.swing.JLabel();
+        botonRegresar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelOfertas.setText("aqui se muestran las ofertas");
+        jPanel1.add(labelOfertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 870, 370));
+
+        botonRegresar.setText("regresar ");
+        jPanel1.add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 160, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 897, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaOfertas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaOfertas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaOfertas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaOfertas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaOfertas().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonRegresar;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelOfertas;
     // End of variables declaration//GEN-END:variables
 }

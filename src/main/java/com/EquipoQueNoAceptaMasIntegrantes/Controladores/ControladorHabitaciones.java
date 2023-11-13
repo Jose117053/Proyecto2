@@ -1,5 +1,6 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Controladores;
 
+import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.Habitacion;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.RepositorioHabitacion;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.RepositorioUsuario;
@@ -15,7 +16,7 @@ public class ControladorHabitaciones implements ActionListener {
     private VistaHabitaciones vista;
     private RepositorioHabitacion modelo;
     private TipoHabitacion tipoHabitacionSeleccionado;
-    private Habitacion habitacionSeleccionada;
+    private static Habitacion habitacionSeleccionada;
 
     public ControladorHabitaciones(VistaHabitaciones vista, RepositorioHabitacion modelo){
         this.vista=vista;
@@ -37,8 +38,10 @@ public class ControladorHabitaciones implements ActionListener {
     private void botonConfirmar(){
         int personas=vista.getPersonas();
         int noches = vista.getNoches();
-        if(personas <=0 || personas >=11 || noches <=0 || noches >=11)
-            vista.setTextError("Ingresa numero mayores que 0 y menores a 11");
+        if(personas <=0 || personas >=9 )
+            vista.setTextError(ControladorIdioma.msg.getProperty("msg.errorPersonas"));
+        else if(noches <=0 || noches >=11)
+            vista.setTextError(ControladorIdioma.msg.getProperty("msg.errorNoches"));
         else {
             vista.setTextError("");
             if (personas <= 2) {
@@ -59,13 +62,14 @@ public class ControladorHabitaciones implements ActionListener {
         int numHabitacion= vista.getNumHabitacion();
         if (esNumeroHabitacionValido(numHabitacion, tipoHabitacionSeleccionado)){
 
-            Habitacion habitacionSeleccionada = modelo.find((long) numHabitacion);
+            habitacionSeleccionada = modelo.find((long) numHabitacion);
             VistaDecoraciones vista=new VistaDecoraciones();
             ControladorDecoradores controladorDecoradores=new ControladorDecoradores(vista);
             this.vista.setVisible(false);
             vista.setVisible(true);
-           // vista.setText(ControladorIdioma.msg.getProperty("msg.resumenHabitacion"));
             vista.setText(habitacionSeleccionada.toString());
+            vista.setTextConfirmacion(ControladorIdioma.msg.getProperty("msg.preparando"));
+            vista.setTextMsgDecoraciones(ControladorIdioma.msg.getProperty("msg.decoradores"));
         }else
             vista.setTextErrorNumHab("Ingresa un numero correcto");
     }
@@ -85,6 +89,9 @@ public class ControladorHabitaciones implements ActionListener {
             default:
                 return false; // En caso de que el tipo no sea reconocido
         }
+    }
+    public static Habitacion getHabitacionSeleccionada(){
+        return habitacionSeleccionada;
     }
 
     // inesperado

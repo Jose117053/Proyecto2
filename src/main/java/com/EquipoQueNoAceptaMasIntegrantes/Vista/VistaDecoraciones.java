@@ -5,8 +5,14 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Vista;
 
 import com.EquipoQueNoAceptaMasIntegrantes.Controladores.ControladorIdioma;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+@Getter
+@Setter
 
 /**
  *
@@ -24,15 +30,39 @@ public class VistaDecoraciones extends javax.swing.JFrame {
         botonChampagne.setText(ControladorIdioma.msg.getProperty("msg.Champagne"));
         botonChocolates.setText(ControladorIdioma.msg.getProperty("msg.Chocolates"));
         botonFlores.setText(ControladorIdioma.msg.getProperty("msg.Flores"));
+        cantidadCena.setName("Cena");
+        cantidadChampagne.setName("Champagne");
+        cantidadChocolates.setName("Chocolates");
+        cantidadFLores.setName("Flores");
+
     }
+    
     public void setText(String cadena){
         labelResumenHabitacion.setText(cadena);
     }
-    public void addActionListener(ActionListener controladorDecoraciones) {
-        botonCena.addActionListener(controladorDecoraciones);
-        botonChampagne.addActionListener(controladorDecoraciones);
-        botonChocolates.addActionListener(controladorDecoraciones);
-        botonFlores.addActionListener(controladorDecoraciones);
+    public void setTextConfirmacion(String cadena){
+        msgPreparando.setText(cadena);
+    }
+    public void setTextMsgDecoraciones(String cadena){
+        msgDecoradores.setText(cadena);
+
+    }
+    public int getCantidadDecoraciones(JLabel label){
+        int cantidad=0;
+        try{
+            cantidad = Integer.parseInt(label.getText());
+        }catch (NumberFormatException e){
+            //Esto no va a pasar
+        }
+
+        return cantidad;
+    }
+    public void setTextoLabel(JLabel label,String cadena){
+        label.setText(cadena);
+    }
+
+    public void addActionListenerEspecifico(JButton boton, ActionListener accion){
+        boton.addActionListener(accion);
     }
 
     /**
@@ -50,6 +80,14 @@ public class VistaDecoraciones extends javax.swing.JFrame {
         botonChocolates = new javax.swing.JButton();
         botonFlores = new javax.swing.JButton();
         labelResumenHabitacion = new javax.swing.JLabel();
+        msgPreparando = new javax.swing.JLabel();
+        cantidadCena = new javax.swing.JLabel();
+        cantidadChampagne = new javax.swing.JLabel();
+        cantidadChocolates = new javax.swing.JLabel();
+        cantidadFLores = new javax.swing.JLabel();
+        msgDecoradores = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        botonContinuar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,10 +114,27 @@ public class VistaDecoraciones extends javax.swing.JFrame {
                 botonFloresActionPerformed(evt);
             }
         });
-        jPanel1.add(botonFlores, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 190, 50));
+        jPanel1.add(botonFlores, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, 190, 50));
 
         labelResumenHabitacion.setText("resumenHabitacion");
-        jPanel1.add(labelResumenHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 450, 200));
+        jPanel1.add(labelResumenHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 300, 200));
+        jPanel1.add(msgPreparando, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 270, 70));
+        jPanel1.add(cantidadCena, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 120, 50));
+        jPanel1.add(cantidadChampagne, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 120, 50));
+        jPanel1.add(cantidadChocolates, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 120, 50));
+        jPanel1.add(cantidadFLores, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 540, 120, 50));
+        jPanel1.add(msgDecoradores, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 270, 70));
+
+        jLabel1.setText("Cantidad:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 80, 30));
+
+        botonContinuar.setText("Continuar");
+        botonContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonContinuarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 610, 190, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,13 +162,25 @@ public class VistaDecoraciones extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonFloresActionPerformed
 
+    private void botonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonContinuarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonContinuarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCena;
     private javax.swing.JButton botonChampagne;
     private javax.swing.JButton botonChocolates;
+    private javax.swing.JButton botonContinuar;
     private javax.swing.JButton botonFlores;
+    private javax.swing.JLabel cantidadCena;
+    private javax.swing.JLabel cantidadChampagne;
+    private javax.swing.JLabel cantidadChocolates;
+    private javax.swing.JLabel cantidadFLores;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelResumenHabitacion;
+    private javax.swing.JLabel msgDecoradores;
+    private javax.swing.JLabel msgPreparando;
     // End of variables declaration//GEN-END:variables
 }
