@@ -27,7 +27,7 @@ public class RepositorioHabitacion implements Repositorio<Habitacion> {
     public static RepositorioHabitacion getInstance() {
 
         if (uniqueInstance == null) {
-            synchronized (RepositorioUsuario.class) {
+            synchronized (RepositorioHabitacion.class) {
                 if (uniqueInstance == null) {
                     uniqueInstance = new RepositorioHabitacion();
                 }

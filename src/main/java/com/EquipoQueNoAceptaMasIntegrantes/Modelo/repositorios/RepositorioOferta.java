@@ -35,7 +35,7 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
      */
     public static RepositorioOferta getInstance() {
         if (uniqueInstance == null) {
-            synchronized (RepositorioUsuario.class) {
+            synchronized (RepositorioOferta.class) {
                 if (uniqueInstance == null) {
                     uniqueInstance = new RepositorioOferta();
                 }
