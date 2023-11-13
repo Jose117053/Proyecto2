@@ -42,8 +42,7 @@ public class Champagne extends HabitacionDecorator {
      * 
      * @return un número que representa el costo del servicio extra en dólares.
      */
-    @Override
-    public double costo() {
-        return 45;
+    @Override public double costo() {
+        return habitacion.costo() + 100;
     }
 }

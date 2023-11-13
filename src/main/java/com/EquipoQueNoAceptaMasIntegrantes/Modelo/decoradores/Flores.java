@@ -42,8 +42,7 @@ public class Flores extends HabitacionDecorator {
      * 
      * @return un número que representa el costo del servicio extra en dólares.
      */
-    @Override
-    public double costo() {
-        return 200;
+    @Override public double costo() {
+        return habitacion.costo() + 20;
     }
 }
