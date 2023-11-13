@@ -1,4 +1,4 @@
-package com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitaciones;
+package com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes;
 
 /** Clase que modela la base de datos de las habitaciones. */
 public class BDHabitacion {

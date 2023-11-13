@@ -1,7 +1,7 @@
-package com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitaciones;
+package com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes;
 
 /** Clase que genera los distintos tipos de habitaciones del hotel. */
-public class GeneradorDeHabitaciones {
+public class GeneradorDeHabitacionesYPaquetes {
 
     /**
      * Método que agrega número de habitación.
@@ -15,5 +15,10 @@ public class GeneradorDeHabitaciones {
         Habitacion habitacion = bd.getHabitacion(tipoHabitacion);
         habitacion.setNumero(numeroHabitacion);
         return habitacion;
+    }
+
+    public Paquete getPaquete(BDPaquetes bd, int tipoPaquete){
+        Paquete paquete= bd.getPaquete(tipoPaquete);
+        return paquete;
     }
 }

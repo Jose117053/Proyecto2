@@ -1,6 +1,6 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios;
 
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitaciones.*;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,7 +39,7 @@ public class RepositorioHabitacion implements Repositorio<Habitacion> {
 
     private void inicializarHabitaciones() {
         BDHabitacion bdHabitacion = new BDHabitacion();
-        GeneradorDeHabitaciones generador = new GeneradorDeHabitaciones();
+        GeneradorDeHabitacionesYPaquetes generador = new GeneradorDeHabitacionesYPaquetes();
         habitaciones = new ArrayList<>();
 
         // Crear 4 habitaciones normales

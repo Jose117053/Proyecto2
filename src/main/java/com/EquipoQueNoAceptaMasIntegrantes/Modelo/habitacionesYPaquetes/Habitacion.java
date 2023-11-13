@@ -1,4 +1,4 @@
-package com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitaciones;
+package com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes;
 
 import lombok.Getter;
 import lombok.Setter;

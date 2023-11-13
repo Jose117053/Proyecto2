@@ -1,8 +1,11 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios;
 
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.paquetes.*;
-import static com.EquipoQueNoAceptaMasIntegrantes.Modelo.paquetes.FactoryPaquetes.creaPaquete;
 
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.BDPaquetes;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.GeneradorDeHabitacionesYPaquetes;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.Paquete;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -43,10 +46,13 @@ public class RepositorioPaquete implements Repositorio<Paquete> {
      * @param codigoPais
      */
     private void inicializarPaquetes(String codigoPais) {
+        BDPaquetes bd=new BDPaquetes(codigoPais);
+
+        GeneradorDeHabitacionesYPaquetes generador=new GeneradorDeHabitacionesYPaquetes();
         paquetes = new ArrayList<>();
-        paquetes.add(creaPaquete(1, codigoPais));
-        paquetes.add(creaPaquete(2, codigoPais));
-        paquetes.add(creaPaquete(3, codigoPais));
+        paquetes.add(generador.getPaquete(bd,1));
+        paquetes.add(generador.getPaquete(bd,2));
+        paquetes.add(generador.getPaquete(bd,3));
 
     }
 
@@ -55,7 +61,7 @@ public class RepositorioPaquete implements Repositorio<Paquete> {
      * @return la colección de paquetes.
      */
     @Override
-    public Collection<Paquete> findAll() {
+    public Collection<Paquete> findAll()  {
         return paquetes;
     }
 

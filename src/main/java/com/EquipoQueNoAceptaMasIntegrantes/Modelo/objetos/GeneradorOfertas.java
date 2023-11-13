@@ -1,6 +1,6 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos;
 
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitaciones.Habitacion;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.Habitacion;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.*;
 import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
 
