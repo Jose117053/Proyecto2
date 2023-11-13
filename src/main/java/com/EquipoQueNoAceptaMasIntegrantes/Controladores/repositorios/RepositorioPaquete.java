@@ -1,5 +1,4 @@
-package com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios;
-
+package com.EquipoQueNoAceptaMasIntegrantes.Controladores.repositorios;
 
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.BDPaquetes;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.GeneradorDeHabitacionesYPaquetes;
@@ -20,6 +19,7 @@ public class RepositorioPaquete implements Repositorio<Paquete> {
 
     /**
      * Método que devuelve la única instancia de RepositorioPaquete.
+     * 
      * @param codigoPais el código del país.
      * @return la única instancia de RepositorioPaquete.
      */
@@ -43,30 +43,33 @@ public class RepositorioPaquete implements Repositorio<Paquete> {
 
     /**
      * Método que añade todos los paquetes de un país en una lista.
+     * 
      * @param codigoPais
      */
     private void inicializarPaquetes(String codigoPais) {
-        BDPaquetes bd=new BDPaquetes(codigoPais);
+        BDPaquetes bd = new BDPaquetes(codigoPais);
 
-        GeneradorDeHabitacionesYPaquetes generador=new GeneradorDeHabitacionesYPaquetes();
+        GeneradorDeHabitacionesYPaquetes generador = new GeneradorDeHabitacionesYPaquetes();
         paquetes = new ArrayList<>();
-        paquetes.add(generador.getPaquete(bd,1));
-        paquetes.add(generador.getPaquete(bd,2));
-        paquetes.add(generador.getPaquete(bd,3));
+        paquetes.add(generador.getPaquete(bd, 1));
+        paquetes.add(generador.getPaquete(bd, 2));
+        paquetes.add(generador.getPaquete(bd, 3));
 
     }
 
     /**
      * Método que regresa la colección de paquetes.
+     * 
      * @return la colección de paquetes.
      */
     @Override
-    public Collection<Paquete> findAll()  {
+    public Collection<Paquete> findAll() {
         return paquetes;
     }
 
     /**
      * Método que busca un paquete por su identificador.
+     * 
      * @return el paquete con tal id.
      */
     @Override

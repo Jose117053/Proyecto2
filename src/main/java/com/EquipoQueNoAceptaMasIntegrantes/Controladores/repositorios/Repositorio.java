@@ -1,4 +1,4 @@
-package com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios;
+package com.EquipoQueNoAceptaMasIntegrantes.Controladores.repositorios;
 
 import java.util.Collection;
 
@@ -7,6 +7,7 @@ public interface Repositorio<T> {
 
     /**
      * Busca un elemento en el inventario usando su clave primaria.
+     * 
      * @param PK Clave primaria del elemento a buscar.
      * @return El elemento encontrado, o null si no se encuentra.
      */
@@ -14,6 +15,7 @@ public interface Repositorio<T> {
 
     /**
      * Obtiene todos los elementos del inventario.
+     * 
      * @return Una colección con todos los elementos.
      */
     public Collection<T> findAll();

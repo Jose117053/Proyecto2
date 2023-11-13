@@ -1,4 +1,4 @@
-package com.EquipoQueNoAceptaMasIntegrantes.Controlador.util;
+package com.EquipoQueNoAceptaMasIntegrantes.Controladores.util;
 
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -9,9 +9,10 @@ public class Correo {
 
     /**
      * Manda un correo electrónico.
-     * @param to el destinatario del correo.
+     * 
+     * @param to      el destinatario del correo.
      * @param subject el asunto del correo.
-     * @param text el contenido del correo.
+     * @param text    el contenido del correo.
      * @throws MessagingException
      */
     public static void sendEmail(String to, String subject, String text) throws MessagingException {
@@ -44,11 +45,12 @@ public class Correo {
 
     /**
      * Prepara el mensaje del correo electrónico.
+     * 
      * @param session
      * @param myAccountEmail el correo electrónico.
-     * @param to el destinatario del correo.
-     * @param subject el asunto del correo.
-     * @param text el contenido del correo.
+     * @param to             el destinatario del correo.
+     * @param subject        el asunto del correo.
+     * @param text           el contenido del correo.
      * @return
      */
     private static Message prepareMessage(Session session, String myAccountEmail, String to, String subject,

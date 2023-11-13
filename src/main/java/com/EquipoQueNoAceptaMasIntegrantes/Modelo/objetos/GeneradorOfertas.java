@@ -1,8 +1,8 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos;
 
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.Habitacion;
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.*;
-import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.repositorios.*;
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.util.Mensajes;
 
 import java.io.IOException;
 import java.util.Collection;

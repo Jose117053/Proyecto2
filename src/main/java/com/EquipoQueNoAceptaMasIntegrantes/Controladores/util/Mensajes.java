@@ -1,4 +1,4 @@
-package com.EquipoQueNoAceptaMasIntegrantes.Controlador.util;
+package com.EquipoQueNoAceptaMasIntegrantes.Controladores.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +22,7 @@ public class Mensajes {
     /**
      * Carga y devuelve las propiedades de mensajes de un archivo determinado
      * por el código del país proporcionado.
+     * 
      * @param codigoPais El código del país para el cual cargar los mensajes.
      * @return Properties que contiene los mensajes para el país especificado.
      * @throws IOException Si ocurre un problema al cargar el archivo.

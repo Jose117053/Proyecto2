@@ -2,7 +2,7 @@ package com.EquipoQueNoAceptaMasIntegrantes;
 
 import java.io.IOException;
 
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.*;
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.repositorios.*;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.GeneradorOfertas;
 
 public class RecepcionHotel {

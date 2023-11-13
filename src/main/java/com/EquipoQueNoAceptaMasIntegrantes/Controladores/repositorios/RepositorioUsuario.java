@@ -1,4 +1,4 @@
-package com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios;
+package com.EquipoQueNoAceptaMasIntegrantes.Controladores.repositorios;
 
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.Usuario;
 import java.util.ArrayList;
@@ -45,9 +45,9 @@ public class RepositorioUsuario implements Repositorio<Usuario> {
         List<Usuario> tempUsuarios;
         try {
             tempUsuarios = List.of(
-                    new Usuario("luisa", "lu123", "Luisa Martinez"),
-                    new Usuario("rafael", "raf123", "Rafael Martinez"),
-                    new Usuario("samantha", "lu123", "Sam Martinez"));
+                    new Usuario("carlos", "carlito23", "Carlos Martinez"),
+                    new Usuario("maria", "mary55", "Maria Lopez"),
+                    new Usuario("juan", "juan97", "Juan Ramirez"));
         } catch (Exception e) {
             tempUsuarios = new ArrayList<>();
             System.err.println("Error inicializando usuarios: " + e.getMessage());
@@ -80,6 +80,5 @@ public class RepositorioUsuario implements Repositorio<Usuario> {
                 .findFirst()
                 .orElse(null);
     }
-
 
 }

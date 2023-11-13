@@ -2,16 +2,19 @@ package com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores;
 
 import java.io.IOException;
 
-import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.util.Mensajes;
 
 /**
- * Clase Flores que hereda de la clase HabitacionDecorator, encargada de definir un servicio
- * extra que se ofrece al hospedarse en el hotel, definira lo que incluye así como su costo.
+ * Clase Flores que hereda de la clase HabitacionDecorator, encargada de definir
+ * un servicio
+ * extra que se ofrece al hospedarse en el hotel, definira lo que incluye así
+ * como su costo.
  */
 public class Flores extends HabitacionDecorator {
-    
+
     /**
      * Constructor de la clase.
+     * 
      * @param habitacion
      */
     public Flores(ExtraHabitacion habitacion) {
@@ -19,21 +22,28 @@ public class Flores extends HabitacionDecorator {
     }
 
     /**
-     * Método encargado de regresar la descripción de los servicios que incluye una habitación
+     * Método encargado de regresar la descripción de los servicios que incluye una
+     * habitación
      * más un servicio extra.
-     * @returns una representación en cadena con la descripción de todos los servicios incluídos
+     * 
+     * @returns una representación en cadena con la descripción de todos los
+     *          servicios incluídos
      *          en la habitación que se está reservando.
      */
-    @Override public String descripcion(String codigoPais) throws IOException {
+    @Override
+    public String descripcion(String codigoPais) throws IOException {
         String flores = Mensajes.cargarMensajes(codigoPais).getProperty("msg.flores");
         return habitacion.descripcion(codigoPais) + flores;
     }
 
     /**
-     * Método encargado de definir el costo del servicio extra que se esta solicitando.
+     * Método encargado de definir el costo del servicio extra que se esta
+     * solicitando.
+     * 
      * @return un número que representa el costo del servicio extra en dólares.
      */
-    @Override public double costo() {
+    @Override
+    public double costo() {
         return 200;
     }
 }

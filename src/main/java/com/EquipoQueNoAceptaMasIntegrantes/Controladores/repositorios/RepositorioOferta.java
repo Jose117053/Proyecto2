@@ -1,4 +1,4 @@
-package com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios;
+package com.EquipoQueNoAceptaMasIntegrantes.Controladores.repositorios;
 
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.interfaces.*;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.Oferta;

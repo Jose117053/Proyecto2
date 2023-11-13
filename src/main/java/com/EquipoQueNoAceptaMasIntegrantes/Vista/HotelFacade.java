@@ -9,8 +9,12 @@ import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
 
-import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Correo;
-import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.repositorios.RepositorioHabitacion;
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.repositorios.RepositorioOferta;
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.repositorios.RepositorioPaquete;
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.repositorios.RepositorioUsuario;
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.util.Correo;
+import com.EquipoQueNoAceptaMasIntegrantes.Controladores.util.Mensajes;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores.Cena;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores.Champagne;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores.Chocolates;
@@ -21,13 +25,9 @@ import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.Paquete;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.GeneradorOfertas;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.Oferta;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.Usuario;
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.RepositorioHabitacion;
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.RepositorioOferta;
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.RepositorioPaquete;
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.RepositorioUsuario;
 
 public class HotelFacade {
-    
+
     RepositorioOferta repositorioOferta;
     RepositorioHabitacion repositorioHabitacion;
     RepositorioPaquete repositorioPaquete;
@@ -36,6 +36,7 @@ public class HotelFacade {
     private static Scanner scanner = new Scanner(System.in);
     private static String codigoPais;
     private static Properties msg;
+
     public enum TipoHabitacion {
         NORMAL, SUITE, GRANDSUITE
     }
