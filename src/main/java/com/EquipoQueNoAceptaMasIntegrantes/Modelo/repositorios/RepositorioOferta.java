@@ -87,13 +87,10 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
     @Override
     public void registrar(Observador observador) {
         synchronized (observadores) {
-            System.out.println("Lista de observadores antes de registrar: " + observadores);
 
             if (!observadores.contains(observador)) {
                 observadores.add(observador);
-                System.out.println("Agregado");
             }
-            System.out.println("Lista de observadores después de registrar: " + observadores);
 
         }
     }
@@ -106,16 +103,7 @@ public class RepositorioOferta implements Repositorio<Oferta>, Sujeto {
     @Override
     public void eliminar(Observador observador) {
         synchronized (observadores) {
-            System.out.println("Lista de observadores antes de eliminar: " + observadores);
-
-            boolean eliminado = observadores.remove(observador);
-            if (eliminado) {
-                System.out.println("Observador eliminado: " + observador);
-            } else {
-                System.out.println("Intento de eliminar un observador que no está en la lista.");
-            }
-            System.out.println("Lista de observadores después de eliminar: " + observadores);
-
+            observadores.remove(observador);
         }
     }
 

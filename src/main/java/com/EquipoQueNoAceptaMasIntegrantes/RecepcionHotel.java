@@ -21,14 +21,13 @@ import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.Habitaci
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.GeneradorOfertas;
 import javax.mail.MessagingException;
 
-
 public class RecepcionHotel {
     public static void main(String[] args) throws IOException {
         ////////////////////////////////////////
-        //VistaIdioma vista=new VistaIdioma();
-        //Properties msg = new Properties();
-        //ControladorIdioma controlador = new ControladorIdioma(vista, msg);
-        //vista.setVisible(true);
+        // VistaIdioma vista=new VistaIdioma();
+        // Properties msg = new Properties();
+        // ControladorIdioma controlador = new ControladorIdioma(vista, msg);
+        // vista.setVisible(true);
         //////////////////////////////////////
         Scanner scanner = new Scanner(System.in);
         RepositorioOferta repositorioOferta = RepositorioOferta.getInstance();
@@ -38,6 +37,7 @@ public class RecepcionHotel {
 
         seleccionarIdioma();
         Usuario usuario = login();
+        repositorioOferta.registrar(usuario);
         RepositorioPaquete repositorioPaquete = RepositorioPaquete.getInstance(codigoPais);
         generadorOfertas.simularCreadorOferta(codigoPais);
 
@@ -139,17 +139,16 @@ public class RecepcionHotel {
                                     Habitacion habitacionSeleccionada = repositorioHabitacion
                                             .find((long) seleccionHabitacion);
 
-                                    //Implementacion decorator
+                                    // Implementacion decorator
                                     int seleccionDeUsuario;
                                     ExtraHabitacion extra = habitacionSeleccionada;
                                     do {
                                         System.out.println(msg.getProperty("msg.menuDecoradores"));
-                                        while(true) {
+                                        while (true) {
                                             try {
                                                 seleccionDeUsuario = Integer.parseInt(scanner.nextLine());
                                                 break;
-                                            }
-                                            catch(NumberFormatException e) {
+                                            } catch (NumberFormatException e) {
                                                 System.out.println(msg.getProperty("msg.opcionNoValida"));
                                             }
                                         }
@@ -166,7 +165,8 @@ public class RecepcionHotel {
                                             case 4:
                                                 extra = new Chocolates(extra);
                                                 break;
-                                            case 0: break;
+                                            case 0:
+                                                break;
                                         }
                                     } while (seleccionDeUsuario != 0);
 
@@ -195,8 +195,11 @@ public class RecepcionHotel {
                                             System.out.printf(msg.getProperty("msg.encontroOfertas") + " %.0f%%\n",
                                                     descuentoMaximo * 100);
                                         }
+                                        repositorioOferta.eliminar(usuario);
+                                        generadorOfertas.detenerGeneradorOfertas();
 
-                                        double costoTotalSinDescuento = costoPorNoche * numNoches + (extra.costo() - costoPorNoche);
+                                        double costoTotalSinDescuento = costoPorNoche * numNoches
+                                                + (extra.costo() - costoPorNoche);
                                         double descuento = costoTotalSinDescuento * descuentoMaximo;
                                         double costoTotalConDescuento = costoTotalSinDescuento - descuento;
                                         System.out
@@ -233,7 +236,7 @@ public class RecepcionHotel {
                                                         paqueteValido = true; // El usuario seleccionó un paquete válido
 
                                                         System.out
-                                                                .println(msg.getProperty("msg.costoPaquete ")
+                                                                .println(msg.getProperty("msg.costoPaquete")
                                                                         + numPersonas
                                                                         + msg.getProperty("msg.personitas")
                                                                         + +costoPaquete
@@ -263,12 +266,13 @@ public class RecepcionHotel {
                                                         : "N/A");
                                         String correoTexto = msg.getProperty("msg.correoInicio");
 
-                                        correoTexto += msg.getProperty("msg.resumen") + "\nNúmero de noches: "
-                                                + numNoches + "\nNúmero de personas: "
+                                        correoTexto += msg.getProperty("msg.resumen") + "\n"
+                                                + msg.getProperty("msg.numNoches") + numNoches
+                                                + msg.getProperty("msg.numPersonas")
                                                 + numPersonas + "\n"
                                                 + msg.getProperty("msg.resumenHabitacion") + "\n"
                                                 + (habitacionSeleccionada != null ? extra.descripcion(codigoPais)
-                                                : "N/A");
+                                                        : "N/A");
 
                                         // Verificar si se seleccionó un paquete y mostrar detalles
                                         if (seleccionPaquete > 0) {
@@ -283,7 +287,7 @@ public class RecepcionHotel {
                                                     + " USD.");
                                             correoTexto += "\n" + msg.getProperty("msg.resumenPaquete") + "\n"
                                                     + (paqueteSeleccionado != null ? paqueteSeleccionado.descripcion()
-                                                    : "N/A")
+                                                            : "N/A")
                                                     + "\n" + msg.getProperty("msg.costoPaquete") + numPersonas
                                                     + msg.getProperty("msg.personitas") + costoPaquete + " USD.";
 
