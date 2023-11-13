@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- Definir la versión de Lombok aquí -->
-        <lombok-version>1.18.24</lombok-version> <!-- Asegúrate de usar la versión más reciente -->
+        <lombok-version>1.18.30</lombok-version> <!-- Asegúrate de usar la versión más reciente -->
     </properties>
 
 <build>
