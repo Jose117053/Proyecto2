@@ -1,14 +1,18 @@
 package com.EquipoQueNoAceptaMasIntegrantes;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.Paquete;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.Oferta;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.repositorios.*;
+import com.EquipoQueNoAceptaMasIntegrantes.Modelo.reservaciones.Reservaciones;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.objetos.Usuario;
 import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Correo;
 import com.EquipoQueNoAceptaMasIntegrantes.Controlador.util.Mensajes;
@@ -132,24 +136,84 @@ public class RecepcionHotel {
                                     seleccionValida = true;
                                     break;
                                 } else if (esNumeroHabitacionValido(seleccionHabitacion, tipoHabitacionSeleccionado)) {
-                                    System.out.println(msg.getProperty("msg.preparando"));
                                     seleccionValida = true; // Establece la bandera a verdadero para salir del ciclo
                                     // Aquí iría la lógica para confirmar y procesar la reserva
 
                                     Habitacion habitacionSeleccionada = repositorioHabitacion
                                             .find((long) seleccionHabitacion);
 
+                                    // Elegimos las fechas de estancia
+                                    LocalDate fechaIngreso = null;
+                                    LocalDate fechaSalida;
+                                    List<LocalDate> diasDeEstancia;
+                                    String fechaReservacion = "";
+                                    Reservaciones reservacion = new Reservaciones();
+                                    Scanner sc = new Scanner(System.in);
+                                    String fechaInvalida = msg.getProperty("msg.fechaValida") + "\n";
+                                    do {
+                                        while (true) {
+                                            try {
+                                                String fechaInicio;
+                                                System.out.println("\n" + msg.getProperty("msg.fechaIngreso"));    
+                                                do {
+                                                    fechaInicio = sc.nextLine();
+                                                    if (cadenaFechaValida(fechaInicio) == true) {
+                                                        LocalDate auxiliar = reservacion.fechaReserva(fechaInicio);
+                                                        if (reservacion.fechaValida(auxiliar) == true) {
+                                                            fechaIngreso = auxiliar;
+                                                            break;
+                                                        }
+                                                        else {
+                                                            System.out.print(fechaInvalida);
+                                                            fechaInicio = null;
+                                                            continue;
+                                                        }
+                                                    }
+                                                    else {
+                                                        System.out.print(fechaInvalida);
+                                                        fechaInicio = null;
+                                                        continue;
+                                                    }
+                                                } 
+                                                while(fechaInicio == null);
+                                                break;
+                                            } catch (InputMismatchException e) {
+                                                System.out.println(fechaInvalida);
+                                            }
+                                        }
+                                        fechaSalida = reservacion.fechaSalida(fechaIngreso, numNoches);
+                                        diasDeEstancia = reservacion.diasDeEstancia(fechaIngreso, fechaSalida);
+                                        if (reservacion.diasDisponibles(diasDeEstancia, habitacionSeleccionada.getDiasReservados()) == false) {
+                                            System.out.print(msg.getProperty("msg.habitacionNoDisponible")+ "\n");
+                                        }
+                                        else {
+                                            fechaReservacion = fechaIngreso.toString() + " - " + fechaSalida.toString();
+                                            //agregar los dias de la nueva reservacion a la lista de la reservacion
+                                            reservacion.agregarReservacion(diasDeEstancia, habitacionSeleccionada.getDiasReservados());
+
+                                            System.out.print(msg.getProperty("msg.habitacionDisponible") + "\n");
+                                        }
+                                    } while (fechaReservacion.equals(""));
+                                    
+                                    System.out.println(msg.getProperty("msg.preparando"));
+
                                     // Implementacion decorator
                                     int seleccionDeUsuario;
                                     ExtraHabitacion extra = habitacionSeleccionada;
                                     do {
                                         System.out.println(msg.getProperty("msg.menuDecoradores"));
-                                        while (true) {
+                                        while(true) {
                                             try {
                                                 seleccionDeUsuario = Integer.parseInt(scanner.nextLine());
-                                                break;
-                                            } catch (NumberFormatException e) {
-                                                System.out.println(msg.getProperty("msg.opcionNoValida"));
+                                                if (seleccionDeUsuario >= 0 && seleccionDeUsuario <= 4) {
+                                                    break;
+                                                }
+                                                else {
+                                                    System.out.println(msg.getProperty("msg.opcionNoValida"));
+                                                }
+                                            }
+                                            catch(Exception e) {
+                                                //System.out.println(msg.getProperty("msg.opcionNoValida"));
                                             }
                                         }
                                         switch (seleccionDeUsuario) {
@@ -260,6 +324,7 @@ public class RecepcionHotel {
                                                 + " USD.");
 
                                         System.out.println(msg.getProperty("msg.resumen"));
+                                        System.out.println("\n" + msg.getProperty("msg.fecha") + " " + fechaReservacion);
                                         System.out.println(msg.getProperty("msg.resumenHabitacion"));
                                         System.out.println(
                                                 habitacionSeleccionada != null ? extra.descripcion(codigoPais)
@@ -267,6 +332,7 @@ public class RecepcionHotel {
                                         String correoTexto = msg.getProperty("msg.correoInicio");
 
                                         correoTexto += msg.getProperty("msg.resumen") + "\n"
+                                                + msg.getProperty("msg.fecha") + " " + fechaReservacion
                                                 + msg.getProperty("msg.numNoches") + numNoches
                                                 + msg.getProperty("msg.numPersonas")
                                                 + numPersonas + "\n"
@@ -290,7 +356,6 @@ public class RecepcionHotel {
                                                             : "N/A")
                                                     + "\n" + msg.getProperty("msg.costoPaquete") + numPersonas
                                                     + msg.getProperty("msg.personitas") + costoPaquete + " USD.";
-
                                         }
 
                                         // Mostrar costo total de la reserva
@@ -461,5 +526,14 @@ public class RecepcionHotel {
             default:
                 return false; // En caso de que el tipo no sea reconocido
         }
+    }
+
+    private static boolean cadenaFechaValida(String fecha) {
+        String patronFecha = "^(0[1-9]|[1-2][0-9]|3[0-1])/(0[1-9]|1[0-2])/\\d{4}$";
+        // Compila el patrón de expresión regular
+        Pattern patron = Pattern.compile(patronFecha);
+        // Crea un objeto Matcher para la cadena de fecha
+        Matcher matcher = patron.matcher(fecha);
+        return matcher.matches();
     }
 }

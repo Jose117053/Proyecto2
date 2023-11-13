@@ -1,18 +1,25 @@
 package com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 /** Clase que modela la base de datos de las habitaciones. */
 public class BDHabitacion {
 
     /* Los lista de habitaciones que maneja el hotel. */
     protected Habitacion[] habitaciones;
 
+    /* */
+    private List<LocalDate> diasReservados = new ArrayList<>();
+
     /**
      * Constructor de la base de datos de las habitaciones, se definen 3 tipos de habitacion.
      */
     public BDHabitacion() {
-        habitaciones = new Habitacion[] { new Habitacion("Normal", 100, 2, "Individual", false, false),
-                new Habitacion("Suite", 150, 5, "King", false, true),
-                new Habitacion("GrandSuite", 200, 8, "King", true, true) };
+        habitaciones = new Habitacion[] { new Habitacion("Normal", 100, 2, "Individual", false, false, diasReservados),
+                new Habitacion("Suite", 150, 5, "King", false, true, diasReservados),
+                new Habitacion("GrandSuite", 200, 8, "King", true, true, diasReservados) };
     }
 
     /**

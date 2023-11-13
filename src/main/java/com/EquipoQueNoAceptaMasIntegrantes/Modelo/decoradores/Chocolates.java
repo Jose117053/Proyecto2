@@ -34,6 +34,6 @@ public class Chocolates extends HabitacionDecorator {
      * @return un número que representa el costo del servicio extra en dólares.
      */
     @Override public double costo() {
-        return 10;
+        return habitacion.costo() + 15;
     }
 }

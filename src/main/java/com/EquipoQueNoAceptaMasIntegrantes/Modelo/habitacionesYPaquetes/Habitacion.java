@@ -2,6 +2,11 @@ package com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.decoradores.ExtraHabitacion;
 
 @Getter
@@ -23,6 +28,8 @@ public class Habitacion implements Cloneable, ExtraHabitacion {
     private boolean suite;
     /* La capacidad máxima de personas de la habitación. */
     private int capacidad;
+    /* */
+    private List<LocalDate> diasReservados = new ArrayList();
 
     /**
      * Constructor de habitaciones.
@@ -33,13 +40,14 @@ public class Habitacion implements Cloneable, ExtraHabitacion {
      * @param vistaAlMar El tipo de habitación GrandSuite.
      * @param suite El tipo de habitación Suite.
      */
-    public Habitacion(String nombre, double costo, int capacidad, String cama, boolean vistaAlMar, boolean suite) {
+    public Habitacion(String nombre, double costo, int capacidad, String cama, boolean vistaAlMar, boolean suite, List<LocalDate> diasReservados) {
         this.nombre = nombre;
         this.costo = costo;
         this.capacidad = capacidad;
         this.cama = cama;
         this.vistaAlMar = vistaAlMar;
         this.suite = suite;
+        this.diasReservados = diasReservados;
     }
 
     /**
@@ -84,7 +92,7 @@ public class Habitacion implements Cloneable, ExtraHabitacion {
      */
     @Override
     public Habitacion clone() {
-        Habitacion clon = new Habitacion(getNombre(), getCosto(), getCapacidad(), getCama(), isVistaAlMar(), isSuite());
+        Habitacion clon = new Habitacion(getNombre(), getCosto(), getCapacidad(), getCama(), isVistaAlMar(), isSuite(), getDiasReservados());
         return clon;
     }
 
