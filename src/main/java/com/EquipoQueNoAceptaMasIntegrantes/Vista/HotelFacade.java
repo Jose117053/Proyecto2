@@ -128,6 +128,17 @@ public class HotelFacade {
         return matcher.matches();
     }
 
+    private static boolean isNumeric(String s) {
+        boolean resultado;
+        try {
+            Integer.parseInt(s);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+        return resultado;
+    }
+
     public void menu() throws IOException {
         boolean sesionActiva = true;
         while (sesionActiva) {
@@ -288,16 +299,23 @@ public class HotelFacade {
                                         System.out.println(msg.getProperty("msg.menuDecoradores"));
                                         while(true) {
                                             try {
-                                                seleccionDeUsuario = Integer.parseInt(scanner.nextLine());
-                                                if (seleccionDeUsuario >= 0 && seleccionDeUsuario <= 4) {
-                                                    break;
+                                                String aux = scanner.nextLine();
+                                                if (isNumeric(aux)) {
+                                                    seleccionDeUsuario = Integer.parseInt(aux);
+                                                    if (seleccionDeUsuario >= 0 && seleccionDeUsuario <= 4) {
+                                                        break;
+                                                    }
+                                                    else
+                                                        System.out.println(msg.getProperty("msg.opcionNoValida"));
+                                                        continue;
                                                 }
                                                 else {
                                                     System.out.println(msg.getProperty("msg.opcionNoValida"));
+                                                    continue;
                                                 }
                                             }
-                                            catch(Exception e) {
-                                                //System.out.println(msg.getProperty("msg.opcionNoValida"));
+                                            catch(NumberFormatException e) {
+                                                throw new NumberFormatException(msg.getProperty("msg.opcionNoValida"));
                                             }
                                         }
                                         switch (seleccionDeUsuario) {
@@ -316,6 +334,7 @@ public class HotelFacade {
                                             case 0: break;
                                         }
                                     } while (seleccionDeUsuario != 0);
+
 
                                     if (habitacionSeleccionada != null) {
                                         double costoPorNoche = habitacionSeleccionada.costo();
