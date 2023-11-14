@@ -1,4 +1,4 @@
-msg.bienvenida=<html>Welcome to our hotel reservation service, log in to continue<html>
+msg.bienvenida=Welcome to our hotel reservation service, log in to continue
 msg.loginUser=Please, enter your username:
 msg.loginPass=Please, enter your password:
 msg.errorLogin=There was an error, please check your data
