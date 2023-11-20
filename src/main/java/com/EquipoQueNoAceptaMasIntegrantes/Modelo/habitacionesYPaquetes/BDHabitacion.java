@@ -10,7 +10,7 @@ public class BDHabitacion {
     /* Los lista de habitaciones que maneja el hotel. */
     protected Habitacion[] habitaciones;
 
-    /* */
+    /* La lista de días reservados. */
     private List<LocalDate> diasReservados = new ArrayList<>();
 
     /**
@@ -32,7 +32,10 @@ public class BDHabitacion {
         return habitaciones[i].clone();
     }
 
-    // metodo necesario??
+    /**
+     * La representación en cadena de todas las habitaciones disponibles.
+     * @return la cadena de todas las habitaciones disponibles.
+     */
     public String habitacionesDisponibles() {
         String cadena = "** Habitaciones disponibles **" + "\n ";
         for (Habitacion habitacion : habitaciones)

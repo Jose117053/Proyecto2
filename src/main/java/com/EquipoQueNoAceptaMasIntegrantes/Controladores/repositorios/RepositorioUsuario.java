@@ -12,7 +12,9 @@ import java.util.List;
  */
 public class RepositorioUsuario implements Repositorio<Usuario> {
 
+    /* La unica instancia de Repositorio Usuario. */
     private static volatile RepositorioUsuario uniqueInstance;
+    /* La lista de usuarios. */
     public final List<Usuario> usuarios;
 
     /**
@@ -55,11 +57,17 @@ public class RepositorioUsuario implements Repositorio<Usuario> {
         return tempUsuarios;
     }
 
+    /**
+     * Método que devuelve la colección de todos los usuarios.
+     */
     @Override
     public Collection<Usuario> findAll() {
         return usuarios;
     }
 
+    /**
+     * Método que regresa el usuario de la colección cuyo id es identico.
+     */
     @Override
     public Usuario find(Long PK) {
         return usuarios.stream()
@@ -80,5 +88,4 @@ public class RepositorioUsuario implements Repositorio<Usuario> {
                 .findFirst()
                 .orElse(null);
     }
-
 }

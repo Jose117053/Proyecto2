@@ -81,7 +81,10 @@ public class Habitacion implements Cloneable, ExtraHabitacion {
                 "Vista Al mar: " + auxVistaAlmar() + "\n ";
     }
 
-    // Tener cuidado con el costo de habitación vs costo extra.
+    /**
+     * Método que regresa el costo total.
+     * @return el costo de la habitación.
+     */
     public double costo() {
         return costo;
     }
@@ -97,9 +100,9 @@ public class Habitacion implements Cloneable, ExtraHabitacion {
     }
 
     /**
-     * 
+     * La representación de una habitación en cadena.
      * @param codigoPais
-     * @returns
+     * @returns la descripción de la habitación.
      */
     @Override
     public String descripcion(String codigoPais) {

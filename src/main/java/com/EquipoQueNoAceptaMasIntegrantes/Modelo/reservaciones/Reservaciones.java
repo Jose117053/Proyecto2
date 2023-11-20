@@ -10,7 +10,7 @@ import java.util.List;
 import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.Habitacion;
 
 /**
- * 
+ * Clase que modela el tiempo de las reservaciones.
  */
 public class Reservaciones {
     /**
@@ -68,7 +68,7 @@ public class Reservaciones {
     }
 
     /**
-     * 
+     * Método para agregar una reservación dado la lista de días y verificarlo con la disponibilidad de habitaciones.
      * @param diasElegidos
      * @param listaHabitacion
      */

@@ -37,6 +37,9 @@ public class RepositorioHabitacion implements Repositorio<Habitacion> {
         return uniqueInstance;
     }
 
+    /**
+     * Método que crea las habitaciones y las agrega a un array.
+     */
     private void inicializarHabitaciones() {
         BDHabitacion bdHabitacion = new BDHabitacion();
         GeneradorDeHabitacionesYPaquetes generador = new GeneradorDeHabitacionesYPaquetes();
@@ -58,10 +61,17 @@ public class RepositorioHabitacion implements Repositorio<Habitacion> {
         }
     }
 
+    /**
+     * COnstructor del repositorio de habitaciones.
+     */
     public RepositorioHabitacion() {
         inicializarHabitaciones();
     }
 
+    /**
+     * Método público para acceder a la lista de habitaciones creadas.
+     * @return la lista de habitaciones
+     */
     public List<Habitacion> getHabitaciones() {
         return habitaciones;
     }
@@ -121,6 +131,9 @@ public class RepositorioHabitacion implements Repositorio<Habitacion> {
         return habitaciones;
     }
 
+    /**
+     * Encuentra una habitación por su número.
+     */
     @Override
     public Habitacion find(Long PK) {
         Habitacion res = habitaciones
@@ -131,18 +144,27 @@ public class RepositorioHabitacion implements Repositorio<Habitacion> {
         return res;
     }
 
-    // Métodos para obtener habitaciones por cada nombre.
-
+    /**
+     * Método que regresa la colección de habitaciones normales.
+     * @return la colección de habitaciones normales
+     */
     public Collection<Habitacion> getNormal() {
         return buscarPorNombre("Normal");
     }
 
+    /**
+     * Método que regresa la colección de habitaciones Suite.
+     * @return la colección de habitaciones Suite.
+     */
     public Collection<Habitacion> getSuite() {
         return buscarPorNombre("Suite");
     }
 
+    /**
+     * Método que regresa la colección de habitaciones GrandSuite.
+     * @return la colección de habitaciones GrandSuite.
+     */
     public Collection<Habitacion> getGrandSuite() {
         return buscarPorNombre("GrandSuite");
     }
-
 }

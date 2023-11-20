@@ -35,9 +35,14 @@ public class GeneradorOfertas {
         this.repositorioHabitacion = repositorioHabitacion;
     }
 
+    /* El hilo de ejecución que genera ofertas. */
     private Thread hiloGeneradorOfertas;
+    /* Una bandera. */
     private volatile boolean continuarGenerandoOfertas = true;
 
+    /**
+     * Método para detener la generación de ofertas al usuario.
+     */
     public void detenerGeneradorOfertas() {
         continuarGenerandoOfertas = false;
         if (hiloGeneradorOfertas != null) {
@@ -45,6 +50,11 @@ public class GeneradorOfertas {
         }
     }
 
+    /**
+     * Método que simula una creación de ofertas.
+     * @param codigoPais
+     * @throws IOException
+     */
     public void simularCreadorOferta(String codigoPais) throws IOException {
         Properties msg = Mensajes.cargarMensajes(codigoPais);
 
