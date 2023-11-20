@@ -29,8 +29,7 @@ public class Habitacion implements Cloneable, ExtraHabitacion {
     /* La capacidad máxima de personas de la habitación. */
     private int capacidad;
     /* */
-    private List<LocalDate> diasReservados = new ArrayList();
-
+    private List<LocalDate> diasReservados;
     /**
      * Constructor de habitaciones.
      * @param nombre El nombre del tipo de habitación.
@@ -47,7 +46,11 @@ public class Habitacion implements Cloneable, ExtraHabitacion {
         this.cama = cama;
         this.vistaAlMar = vistaAlMar;
         this.suite = suite;
-        this.diasReservados = diasReservados;
+        this.diasReservados = new ArrayList<>();
+    }
+
+    public List<LocalDate> getDiasReservados(Habitacion habitacion) {
+        return habitacion.diasReservados;
     }
 
     /**

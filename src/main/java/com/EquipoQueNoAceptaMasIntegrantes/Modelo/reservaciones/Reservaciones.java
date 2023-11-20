@@ -6,9 +6,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import com.EquipoQueNoAceptaMasIntegrantes.Modelo.habitacionesYPaquetes.Habitacion;
-
 /**
  * Clase que modela el tiempo de las reservaciones.
  */
@@ -102,7 +99,6 @@ public class Reservaciones {
      * @return
      */
     public boolean fechaValida(LocalDate fecha) {
-        //System.out.println(LocalDate.now());
         return LocalDate.now().isBefore(fecha);
     }
 }

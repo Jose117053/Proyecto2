@@ -17,9 +17,10 @@ public class BDHabitacion {
      * Constructor de la base de datos de las habitaciones, se definen 3 tipos de habitacion.
      */
     public BDHabitacion() {
-        habitaciones = new Habitacion[] { new Habitacion("Normal", 100, 2, "Individual", false, false, diasReservados),
-                new Habitacion("Suite", 150, 5, "King", false, true, diasReservados),
-                new Habitacion("GrandSuite", 200, 8, "King", true, true, diasReservados) };
+        habitaciones = new Habitacion[] { 
+            new Habitacion("Normal", 100, 2, "Individual", false, false, diasReservados),
+            new Habitacion("Suite", 150, 5, "King", false, true, diasReservados),
+            new Habitacion("GrandSuite", 200, 8, "King", true, true, diasReservados) };
     }
 
     /**
